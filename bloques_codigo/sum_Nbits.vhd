@@ -22,7 +22,7 @@ architecture sum_Nb_arq of sum_Nb is
 	signal c_aux: std_logic_vector(N downto 0);
 begin
 	sum_Nb_gen: for i in 0 to N-1 generate
-		sum1b_inst: entity work.sum_1bit
+		sum1b_inst: entity work.sum_1b
 			port map(
 				a_i	=> a_i(i),
 				b_i	=> b_i(i),
