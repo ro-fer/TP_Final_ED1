@@ -1,55 +1,71 @@
 -- Contador BCD
--- Estudiante: Fernandez, Rocio
+-- Estudiante: Fernández, Rocío
 
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
--- BCD_counter.vhd
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_1164.all;
 
 entity BCD_counter is
-port (
-    clk_i     : in std_logic; --Clock
-    rst_i     : in std_logic; -- Reset
-    enable_i  : in std_logic; -- Enable
-    count_o   : out std_logic_vector(3 downto 0); -- Salida BCD (0-9)
-    carry_o   : out std_logic -- Señal de acarreo para el próximo dígito
-);
-end entity;
-
-architecture Structural of BCD_counter is
-    component flip_flop_d
-    port (
-        clk_i : in std_logic;
-        d_i   : in std_logic;
-        q_o   : out std_logic
+  generic(
+    N: natural := 4 -- Nro bits
     );
-    end component;
+  port(
+    clk_i: in std_logic; -- clock 
+    rst_i: in std_logic; -- Reset 
+    ena_i: in std_logic; -- Enable 
+    count: out std_logic_vector(N-1 downto 0); -- Valor actual del contador
+    max: out std_logic -- Indica si se alcanzó el valor máximo (9)
+  );
+end;
 
-    signal count : std_logic_vector(3 downto 0) := "0000";
-    signal next_count : std_logic_vector(3 downto 0);
+architecture BCD_counter_arq of BCD_counter is
+
+  -- Señales auxiliares
+  signal Qreg_aux: std_logic_vector(N-1 downto 0); -- Salida 
+  signal Dinc_aux: std_logic_vector(N-1 downto 0); -- Entrada  (valor +1)
+  signal rst_aux: std_logic; -- Reset interno 
+  signal comp_aux: std_logic; -- Salida del comparador
+  signal andcomp: std_logic; -- AND entre enable y salida del comparador
+  constant b_aux: std_logic_vector(N-1 downto 0) := "0001"; -- Constante para sumar 1
 
 begin
 
-    -- Incrementador BCD sin usar '+'
-    next_count(0) <= count(0) xor (enable_i);
-    next_count(1) <= count(1) xor (next_count(0) and enable_i);
-    next_count(2) <= count(2) xor ((next_count(1) and next_count(0)) and enable_i);
-    next_count(3) <= count(3) xor (((next_count(2) and next_count(1)) or (next_count(2) and next_count(0)) or (next_count(1) and next_count(0))) and enable_i;
+  -- Registro de N bits: almacena el valor actual del contador
+  reg0: entity work.reg_Nb
+    generic map(N => N)
+    port map(
+      clk_i => clk_i,     -- clock
+      rst_i => rst_aux,   -- Reset
+      ena_i => ena_i,     -- Enable
+      D_reg => Dinc_aux,  -- Valor a almacenar (registro +1)
+      Q_reg => Qreg_aux    -- Salida 
+    );
 
-    -- Registros para cada bit del contador
-    registers : for i in 0 to 3 generate
-        reg_bit: flip_flop_d
-        port map (
-            clk_i => clk_i,
-            d_i   => next_count(i),
-            q_o   => count(i)
-        );
-    end generate;
+  -- Sumador de N bits: incrementa el valor almacenado en 1
+  sumNb0: entity work.sum_Nb
+    generic map(N => N)
+    port map(
+      a_i => Qreg_aux,    -- Valor actual del registro
+      b_i => b_aux,       -- Valor constante "0001"
+      c_i => '0',         -- Carry de entrada
+      s_o => Dinc_aux,    -- Resultado de la suma
+      c_o => open         -- Carry de salida (no usado)
+    );
 
-    -- Salidas
-    count_o <= count;
-    carry_o <= '1' when count = "1001" and enable_i = '1' else '0';
+  -- Comparador de N bits: compara si el valor es igual a 9 ("1001")
+  compNb0: entity work.comp_Nb
+    generic map(N => N)
+    port map(
+      a => Qreg_aux,  -- Valor actual del registro
+      b => "1001",    -- Comparamos con el número 9
+      s => comp_aux   -- Salida del comparador ('1' si son iguales)
+    );
+
+  -- Lógica de reset: reinicia cuando se llega a 9 o se activa el reset maestro
+  rst_aux <= andcomp or rst_i;    -- Señal de reset interna
+  andcomp <= comp_aux and ena_i;  -- Solo reiniciar si el enable está activo
+
+  -- Salidas
+  count <= Qreg_aux;              -- Valor actual del contador
+  max <= comp_aux;                -- Señal de valor máximo (9)
 
 end architecture;
