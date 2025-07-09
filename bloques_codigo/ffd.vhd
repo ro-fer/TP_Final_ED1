@@ -3,26 +3,27 @@
 
 library IEEE;
 use IEEE.std_logic_1164.all;
+
 entity ffd is
 	port (
-		clk_i: in std_logic; -- Clock
-		rst_i: in std_logic; -- Reset
-		ena_i: in std_logic; -- Enable
-		D_i : in std_logic; -- Dato
-		Q_o: in std_logic; -- Salida
+		clk_i : in std_logic; -- Clock
+		rst_i : in std_logic; -- Reset
+		ena_i : in std_logic; -- Enable
+		d_i   : in std_logic; -- Dato
+		q_o   : out std_logic -- Salida
 	);
-end;
+end entity;
 
 architecture ffd_arc of ffd is
 begin
 	process(clk_i)
 	begin
-		if rising_edge(clk_i) then
-			if rst_i = '1' then
-				Q_o <= '0';
-			elsif ena_i = '1' then
-				Q_o <= D_i;
+		if rising_edge(clk_i) then 
+			if rst_i = '1' then         -- Reset activo
+				q_o <= '0';
+			elsif ena_i = '1' then      -- Enable activo
+				q_o <= d_i;
 			end if;
 		end if;
 	end process;
-end;
+end architecture;
