@@ -32,6 +32,6 @@ begin
 			);
 	end generate;
 	-- Conexiones
-	c_aux(0) <= c_i;
+	
 	c_o <= c_aux(N);
 end;
