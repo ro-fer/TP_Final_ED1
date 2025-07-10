@@ -12,7 +12,7 @@ entity ffd is
 		d_i   : in std_logic; -- Dato
 		q_o   : out std_logic -- Salida
 	);
-end entity;
+end ffd;
 
 architecture ffd_arc of ffd is
 begin
@@ -26,4 +26,4 @@ begin
 			end if;
 		end if;
 	end process;
-end architecture;
+end ffd_arc;
