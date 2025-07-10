@@ -15,4 +15,4 @@ begin
 
   a <= "1001" after 10 ns, "1111" after 30 ns;
   b <= "1001" after 10 ns, "0111" after 30 ns;
-end;
+end architecture;
