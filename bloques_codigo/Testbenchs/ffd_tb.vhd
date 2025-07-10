@@ -17,20 +17,18 @@ architecture ffd_tb_arq of ffd_tb is
         );
     end component;
 
-    -- Señales del testbench
+    -- seniales del testbench (USAR std_logic, no bit)
     signal clk_i_tb   : std_logic := '0';
-    signal rst_i_tb   : std_logic := '1';  -- Activado desde el inicio
+    signal rst_i_tb   : std_logic := '0';
     signal ena_i_tb   : std_logic := '0';
     signal d_i_tb     : std_logic := '0';
     signal q_o_tb     : std_logic;
 
 begin 
-    -- Estímulos
-    rst_i_tb  <= '1', '0' after 10 ns;  -- Reset inicial
-    ena_i_tb  <= '1' after 10 ns, '0' after 70 ns;
-    d_i_tb    <= '1' after 20 ns, '0' after 30 ns, '1' after 40 ns, '0' after 80 ns;
-
-    -- Generador de clock: período 10 ns
+    -- estimulos
+    ena_i_tb    <= '1' after 10 ns, '0' after 70 ns; 
+    d_i_tb      <= '1' after 20 ns, '0' after 30 ns, '1' after 40 ns, '0' after 80 ns; 
+    rst_i_tb    <= '1' after 50 ns, '0' after 60 ns; 
     clk_process : process
     begin
         while true loop
@@ -41,7 +39,7 @@ begin
         end loop;
     end process;
 
-    -- Instancia del DUT
+    -- DUT
     DUT: ffd
         port map(
             clk_i => clk_i_tb,
