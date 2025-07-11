@@ -26,7 +26,7 @@ architecture c33k_arq of c33k is
   signal rst_aux     : std_logic;                      -- Reset aux
   signal Dinc_aux    : std_logic_vector(N-1 downto 0); -- incrementado
   signal Qreg_aux    : std_logic_vector(N-1 downto 0); -- Valor actual
-  constant b_aux     : std_logic_vector(N-1 downto 0) := "0000000000000001"; -- Sumar 1
+  constant b_aux     : std_logic_vector(N-1 downto 0) := "0000000000000000000001"; -- Sumar 1
   signal QBCD_aux    : std_logic;                      -- Salida del comparador principal
   constant VAL_3300000 : std_logic_vector(N-1 downto 0) := std_logic_vector(to_unsigned(3300000, N));
 

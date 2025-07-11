@@ -4,14 +4,14 @@ use IEEE.std_logic_1164.all;
 
 entity c33k_tb is
   generic(
-    N: natural := 16
+    N: natural := 22
   );
 end;
 
 architecture c33k_tb_arq of c33k_tb is
 component c33k is
   generic(
-    N: natural := 16
+    N: natural := 22
   );
   port(
     clk_i: in std_logic; -- Clock
@@ -33,12 +33,12 @@ begin
   rst_tb <= '0' after 80 ns; -- Me aseguro de que al menos
                             -- tarde mas de un ciclo de clk
 
-  DUT: c33k
-    port map(
-      clk_i  =>  clk_tb,
-      rst_i  =>  rst_tb,
-      ena_i  =>  ena_tb,
-      Q_BCD  =>  Q_BCD_tb,
-      Q_reg  =>  Q_reg_tb
-    );
-end;
+DUT: c33k
+  generic map(N => 22)
+  port map(
+    clk_i  => clk_tb,
+    rst_i  => rst_tb,
+    ena_i  => ena_tb,
+    Q_BCD  => Q_BCD_tb,
+    Q_reg  => Q_reg_tb
+  );
