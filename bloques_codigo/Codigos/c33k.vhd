@@ -4,10 +4,12 @@
 
 library IEEE;
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
 
 entity c33k is
   generic(
-    N: natural := 16 -- Bits del contador
+    N: natural := 22 -- Bits del contador
   );
   port(
     clk_i   : in std_logic; -- Clock
@@ -26,6 +28,8 @@ architecture c33k_arq of c33k is
   signal Qreg_aux    : std_logic_vector(N-1 downto 0); -- Valor actual
   constant b_aux     : std_logic_vector(N-1 downto 0) := "0000000000000001"; -- Sumar 1
   signal QBCD_aux    : std_logic;                      -- Salida del comparador principal
+  constant VAL_3300000 : std_logic_vector(N-1 downto 0) := std_logic_vector(to_unsigned(3300000, N));
+
 
 begin
 
@@ -56,7 +60,7 @@ begin
     generic map(N => N)
     port map(
       a => Qreg_aux,                  -- Valor actual 
-      b => "1100100101101010100000",  -- Valor binario de 3 300 000
+      b => VAL_3300000,  -- Valor binario de 3 300 000
       s => QBCD_aux                   -- Salida del comparador ('1' si son iguales)
     );
 
