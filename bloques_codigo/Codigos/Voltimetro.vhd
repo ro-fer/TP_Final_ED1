@@ -130,7 +130,7 @@ begin
   --------------------------------------------------------------------------
   -- Display de los caracteres en pantalla
   --------------------------------------------------------------------------
-  disp : entity work.display
+  disp : entity work.bin8_to_bcd
     port map(
       clk_i      => clk_i,
       rst_i      => rst_i,
