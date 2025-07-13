@@ -1,44 +1,39 @@
--- VOLTIMETRO
+-- Voltímetro VGA Intermedio
 -- Estudiante: Fernández, Rocío
 
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use work.utils.all;
 
 entity Voltimetro is
   port (
-    clk_i           : in bit;
-    rst_i           : in bit;
-    data_volt_in_i  : in bit;
-    data_volt_out_o : out bit;
-    hs_o            : out bit;
-    vs_o            : out bit;
-    red_o           : out bit;
-    grn_o           : out bit;
-    blu_o           : out bit
+    clk_i           : in std_logic;
+    rst_i           : in std_logic;
+    data_volt_in_i  : in std_logic;
+    data_volt_out_o : out std_logic;
+    hs_o            : out std_logic;
+    vs_o            : out std_logic;
+    red_o           : out std_logic;
+    grn_o           : out std_logic;
+    blu_o           : out std_logic
   );
 end entity;
 
 architecture rtl of Voltimetro is
 
-  ------------------------------------------------------------------------------
   -- Señales internas
-  ------------------------------------------------------------------------------
-  signal clk      : std_logic := '0';
-  signal rst      : std_logic := '0';
-  signal adc_i    : std_logic := '0';
-  signal adc_out  : std_logic := '0';
-
-  signal ones     : std_logic_vector(7 downto 0);
+  signal adc_out  : std_logic;
   signal rst_ones : std_logic;
   signal ena_ones : std_logic;
 
-  signal cen_bcd, dec_bcd, uni_bcd : std_logic_vector(3 downto 0);
+  signal ones     : vectBCD(2 downto 0);  -- Centena, Decena, Unidad
+  signal cen_bcd  : std_logic_vector(3 downto 0);
+  signal dec_bcd  : std_logic_vector(3 downto 0);
+  signal uni_bcd  : std_logic_vector(3 downto 0);
+
   signal char0, char1, char2, char3, char4 : std_logic_vector(6 downto 0);
-
-  signal ascii_48 : std_logic_vector(3 downto 0) := "00110000";
-
-  signal ascii_cen, ascii_dec, ascii_uni : std_logic_vector(6 downto 0);
+  constant ascii_48 : std_logic_vector(3 downto 0) := "0011"; -- valor binario de 48 decimal → '0'
 
   signal pix_x, pix_y : std_logic_vector(9 downto 0);
   signal video_on     : std_logic;
@@ -46,58 +41,45 @@ architecture rtl of Voltimetro is
 
 begin
 
-  ------------------------------------------------------------------------------
-  -- Conversión de tipos (bit -> std_logic)
-  ------------------------------------------------------------------------------
-  clk   <= std_logic(clk_i);
-  rst   <= std_logic(rst_i);
-  adc_i <= std_logic(data_volt_in_i);
+  --------------------------------------------------------------------------
+  -- ADC_SD → paso directo (puede tener un registro si querés suavizado)
+  --------------------------------------------------------------------------
+  adc_out <= data_volt_in_i;
+  data_volt_out_o <= adc_out;
 
-  ------------------------------------------------------------------------------
-  -- ADC_SD → salida directa (buffer opcional)
-  ------------------------------------------------------------------------------
-  adc_out <= adc_i;
-  data_volt_out_o <= bit(adc_out);
-
-  ------------------------------------------------------------------------------
-  -- cOnes: cuenta los '1' del ADC en ventana
-  ------------------------------------------------------------------------------
+  --------------------------------------------------------------------------
+  -- Contador de unos en la ventana de muestreo (ventana de ~33k ciclos)
+  --------------------------------------------------------------------------
   contador_1s : entity work.cOnes
-    generic map(N => 8)
+    generic map(N => 3)  -- 3 dígitos: centenas, decenas, unidades
     port map(
-      clk_i  => clk,
-      rst_i  => rst_ones,
-      ena_i  => ena_ones,
-      adc_i  => adc_out,
-      ones_o => ones
+      clk_i => clk_i,
+      rst_i => rst_ones,
+      ena_i => adc_out,
+      BCD_o => ones
     );
 
-  ------------------------------------------------------------------------------
-  -- c33k: genera ventana de muestreo
-  ------------------------------------------------------------------------------
   ventana : entity work.c33k
-    port map(
-      clk_i  => clk,
-      rst_i  => rst,
-      ena_o  => ena_ones,
-      rst_o  => rst_ones
-    );
+  port map(
+    clk_i   => clk_i,
+    rst_i   => rst_i,
+    ena_i   => '1',
+    Q_BCD   => rst_ones,
+    Q_reg   => ena_ones,
+    cuenta  => open
+  );
 
-  ------------------------------------------------------------------------------
-  -- binario → BCD
-  ------------------------------------------------------------------------------
-  bin_to_bcd : entity work.bin8_to_bcd
-    port map(
-      bin_i => ones,
-      cen_o => cen_bcd,
-      dec_o => dec_bcd,
-      uni_o => uni_bcd
-    );
+  --------------------------------------------------------------------------
+  -- Desempaquetado del vector BCD para pasarlo a ASCII
+  --------------------------------------------------------------------------
+  cen_bcd <= ones(2);
+  dec_bcd <= ones(1);
+  uni_bcd <= ones(0);
 
-  ------------------------------------------------------------------------------
-  -- BCD → ASCII ('0' + cifra BCD) usando sum_Nb estructurales
-  ------------------------------------------------------------------------------
-  ascii_cen : entity work.sum_Nb
+  --------------------------------------------------------------------------
+  -- BCD → ASCII ('0' + valor)
+  --------------------------------------------------------------------------
+  ascii_cen_sum : entity work.sum_Nb
     generic map(N => 4)
     port map(
       a_i => cen_bcd,
@@ -107,7 +89,7 @@ begin
       c_o => open
     );
 
-  ascii_dec : entity work.sum_Nb
+  ascii_dec_sum : entity work.sum_Nb
     generic map(N => 4)
     port map(
       a_i => dec_bcd,
@@ -117,7 +99,7 @@ begin
       c_o => open
     );
 
-  ascii_uni : entity work.sum_Nb
+  ascii_uni_sum : entity work.sum_Nb
     generic map(N => 4)
     port map(
       a_i => uni_bcd,
@@ -127,17 +109,17 @@ begin
       c_o => open
     );
 
-  -- '.' y 'V'
-  char1 <= "0101110"; -- '.'
+  -- Puntos fijos
+  char1 <= "0101110"; -- '.' (punto decimal)
   char4 <= "1010110"; -- 'V'
 
-  ------------------------------------------------------------------------------
+  --------------------------------------------------------------------------
   -- VGA Controller
-  ------------------------------------------------------------------------------
+  --------------------------------------------------------------------------
   vga_ctrl : entity work.vga_controller
     port map(
-      clk_i     => clk,
-      rst_i     => rst,
+      clk_i     => clk_i,
+      rst_i     => rst_i,
       hsync_o   => hs_o,
       vsync_o   => vs_o,
       video_on  => video_on,
@@ -145,13 +127,13 @@ begin
       pix_y_o   => pix_y
     );
 
-  ------------------------------------------------------------------------------
-  -- Display de los 5 caracteres ("X.XXV")
-  ------------------------------------------------------------------------------
+  --------------------------------------------------------------------------
+  -- Display de los caracteres en pantalla
+  --------------------------------------------------------------------------
   disp : entity work.display
     port map(
-      clk_i      => clk,
-      rst_i      => rst,
+      clk_i      => clk_i,
+      rst_i      => rst_i,
       pix_x_i    => pix_x,
       pix_y_i    => pix_y,
       video_on_i => video_on,
@@ -163,10 +145,10 @@ begin
       pixel_o    => pixel_color
     );
 
-  ------------------------------------------------------------------------------
-  -- Salida VGA monocromática (solo rojo activo si pixel = 1)
-  ------------------------------------------------------------------------------
-  red_o <= bit(pixel_color);
+  --------------------------------------------------------------------------
+  -- Salida VGA monocromática (solo rojo)
+  --------------------------------------------------------------------------
+  red_o <= pixel_color;
   grn_o <= '0';
   blu_o <= '0';
 
