@@ -60,7 +60,7 @@ begin
         -- Reset inicial
         wait for 100 ns;
         rst_tb <= '0';
-
+        wait for 17 ms;
         -- Ejecutar por algunos microsegundos
         wait for 5 ms;
         wait;
