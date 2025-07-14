@@ -7,31 +7,52 @@ end entity;
 
 architecture sim of mux_tb is
 
+  -- Declaración del componente MUX
   component mux is
     port (
-      clk_i    : in std_logic;
-      rst_i    : in std_logic;
-      pix_x_i  : in std_logic_vector(9 downto 0);
-      pix_y_i  : in std_logic_vector(9 downto 0);
-      rom_pixel: out std_logic
+      clk_i      : in std_logic;
+      rst_i      : in std_logic;
+      pix_x_i    : in std_logic_vector(9 downto 0);
+      pix_y_i    : in std_logic_vector(9 downto 0);
+      video_on_i : in std_logic;
+      char0      : in std_logic_vector(6 downto 0);
+      char1      : in std_logic_vector(6 downto 0);
+      char2      : in std_logic_vector(6 downto 0);
+      char3      : in std_logic_vector(6 downto 0);
+      char4      : in std_logic_vector(6 downto 0);
+      pixel_o    : out std_logic
     );
   end component;
 
-  signal clk_tb    : std_logic := '0';
-  signal rst_tb    : std_logic := '1';
-  signal pix_x_tb  : std_logic_vector(9 downto 0) := (others => '0');
-  signal pix_y_tb  : std_logic_vector(9 downto 0) := (others => '0');
-  signal rom_pixel_tb : std_logic;
+  -- Señales para la simulación
+  signal clk_tb      : std_logic := '0';
+  signal rst_tb      : std_logic := '1';
+  signal pix_x_tb    : std_logic_vector(9 downto 0) := (others => '0');
+  signal pix_y_tb    : std_logic_vector(9 downto 0) := (others => '0');
+  signal video_on_tb : std_logic := '0';
+  signal char0_tb    : std_logic_vector(6 downto 0) := "0000000";
+  signal char1_tb    : std_logic_vector(6 downto 0) := "0000001";
+  signal char2_tb    : std_logic_vector(6 downto 0) := "0000010";
+  signal char3_tb    : std_logic_vector(6 downto 0) := "0000011";
+  signal char4_tb    : std_logic_vector(6 downto 0) := "0000100";
+  signal pixel_o_tb  : std_logic;
 
 begin
 
+  -- Instanciación del DUT
   DUT: mux
     port map (
-      clk_i    => clk_tb,
-      rst_i    => rst_tb,
-      pix_x_i  => pix_x_tb,
-      pix_y_i  => pix_y_tb,
-      rom_pixel=> rom_pixel_tb
+      clk_i      => clk_tb,
+      rst_i      => rst_tb,
+      pix_x_i    => pix_x_tb,
+      pix_y_i    => pix_y_tb,
+      video_on_i => video_on_tb,
+      char0      => char0_tb,
+      char1      => char1_tb,
+      char2      => char2_tb,
+      char3      => char3_tb,
+      char4      => char4_tb,
+      pixel_o    => pixel_o_tb
     );
 
   -- Clock generation: 50 MHz (20 ns period)
@@ -45,26 +66,28 @@ begin
     end loop;
   end process;
 
+  -- Estímulos de prueba
   stim_proc: process
   begin
     wait for 40 ns;
-    rst_tb <= '0'; -- quitar reset
+    rst_tb <= '0'; -- salir del reset
+    video_on_tb <= '1'; -- habilitar video
 
-    -- Barrido horizontal de pix_x para una fila fija de pix_y
+    -- Barrido horizontal
     for x in 0 to 127 loop
       pix_x_tb <= std_logic_vector(to_unsigned(x, 10));
-      pix_y_tb <= (others => '0');  -- fila 0
+      pix_y_tb <= (others => '0');
       wait for 20 ns;
     end loop;
 
-    -- Barrido vertical de pix_y para un pix_x fijo
+    -- Barrido vertical
     for y in 0 to 31 loop
-      pix_x_tb <= (others => '0');  -- columna 0
+      pix_x_tb <= (others => '0');
       pix_y_tb <= std_logic_vector(to_unsigned(y, 10));
       wait for 20 ns;
     end loop;
 
-    -- Barrido combinado aleatorio de pix_x y pix_y (ejemplo)
+    -- Combinación aleatoria
     for i in 0 to 50 loop
       pix_x_tb <= std_logic_vector(to_unsigned(i*2, 10));
       pix_y_tb <= std_logic_vector(to_unsigned(i, 10));
