@@ -20,7 +20,8 @@ architecture sim of mux_tb is
       char2      : in std_logic_vector(7 downto 0);
       char3      : in std_logic_vector(7 downto 0);
       char4      : in std_logic_vector(7 downto 0);
-      pixel_o    : out std_logic
+      pixel_o    : out std_logic;
+      char_sel_o : out std_logic_vector(7 downto 0)
     );
   end component;
 
@@ -36,6 +37,8 @@ architecture sim of mux_tb is
   signal char3_tb    : std_logic_vector(7 downto 0) := "00000011";
   signal char4_tb    : std_logic_vector(7 downto 0) := "00000100";
   signal pixel_o_tb  : std_logic;
+  signal char_sel_tb : std_logic_vector(7 downto 0);
+
 
 begin
 
@@ -52,7 +55,8 @@ begin
       char2      => char2_tb,
       char3      => char3_tb,
       char4      => char4_tb,
-      pixel_o    => pixel_o_tb
+      pixel_o    => pixel_o_tb,
+      char_sel_o => char_sel_tb
     );
 
   -- Clock generation: 50 MHz (20 ns period)
