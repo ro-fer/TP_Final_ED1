@@ -32,7 +32,9 @@ architecture rtl of Voltimetro is
   signal dec_bcd  : std_logic_vector(3 downto 0);
   signal uni_bcd  : std_logic_vector(3 downto 0);
 
-  signal char0, char1, char2, char3, char4 : std_logic_vector(6 downto 0);
+  signal char0, char1, char2, char3, char4 : std_logic_vector(7 downto 0);
+  signal ascii_cen, ascii_dec, ascii_uni : std_logic_vector(3 downto 0);
+
   constant ascii_48 : std_logic_vector(3 downto 0) := "0011"; -- valor binario de 48 decimal → '0'
 
   signal pix_x, pix_y : std_logic_vector(9 downto 0);
@@ -80,38 +82,42 @@ begin
   -- BCD → ASCII
   --------------------------------------------------------------------------
   ascii_cen_sum : entity work.sum_Nb
-    generic map(N => 4)
-    port map(
-      a_i => cen_bcd,
-      b_i => ascii_48,
-      c_i => '0',
-      s_o => char0,
-      c_o => open
-    );
+  generic map(N => 4)
+  port map(
+    a_i => cen_bcd,
+    b_i => ascii_48,
+    c_i => '0',
+    s_o => ascii_cen,
+    c_o => open
+  );
 
-  ascii_dec_sum : entity work.sum_Nb
-    generic map(N => 4)
-    port map(
-      a_i => dec_bcd,
-      b_i => ascii_48,
-      c_i => '0',
-      s_o => char2,
-      c_o => open
-    );
+ascii_dec_sum : entity work.sum_Nb
+  generic map(N => 4)
+  port map(
+    a_i => dec_bcd,
+    b_i => ascii_48,
+    c_i => '0',
+    s_o => ascii_dec,
+    c_o => open
+  );
 
-  ascii_uni_sum : entity work.sum_Nb
-    generic map(N => 4)
-    port map(
-      a_i => uni_bcd,
-      b_i => ascii_48,
-      c_i => '0',
-      s_o => char3,
-      c_o => open
-    );
+ascii_uni_sum : entity work.sum_Nb
+  generic map(N => 4)
+  port map(
+    a_i => uni_bcd,
+    b_i => ascii_48,
+    c_i => '0',
+    s_o => ascii_uni,
+    c_o => open
+  );
+  char0 <= "0000" & ascii_cen;
+  char2 <= "0000" & ascii_dec;
+  char3 <= "0000" & ascii_uni;
+
 
   -- Puntos fijos
-  char1 <= "0101110"; -- '.' (punto decimal)
-  char4 <= "1010110"; -- 'V'
+  char1 <= "00101110"; -- '.' (punto decimal)
+  char4 <= "01010110"; -- 'V'
 
   --------------------------------------------------------------------------
   -- VGA Controller
@@ -128,9 +134,9 @@ begin
     );
 
   --------------------------------------------------------------------------
-  -- Display de los caracteres en pantalla (CORREGIDO)
+  -- Display de los caracteres en pantalla 
   --------------------------------------------------------------------------
-  disp : entity work.display_ascii
+  disp : entity work.mux
     port map(
       clk_i      => clk_i,
       rst_i      => rst_i,
