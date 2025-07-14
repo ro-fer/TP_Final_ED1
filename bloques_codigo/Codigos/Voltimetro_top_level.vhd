@@ -23,7 +23,7 @@ entity Voltimetro_toplevel is
 	
 end Voltimetro_toplevel;
 
-architecture Voltimetro_toplevel_arq of Voltimetro_toplevel is
+rchitecture Voltimetro_toplevel_arq of Voltimetro_toplevel is
 
 	-------------------------------------------------------------------------------------
 	-- Declaracion del componente voltimetro
