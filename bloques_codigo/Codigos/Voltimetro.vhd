@@ -42,13 +42,13 @@ architecture rtl of Voltimetro is
 begin
 
   --------------------------------------------------------------------------
-  -- ADC_SD → paso directo (puede tener un registro si querés suavizado)
+  -- ADC_SD → paso directo
   --------------------------------------------------------------------------
   adc_out <= data_volt_in_i;
   data_volt_out_o <= adc_out;
 
   --------------------------------------------------------------------------
-  -- Contador de unos en la ventana de muestreo (ventana de ~33k ciclos)
+  -- Contador de unos
   --------------------------------------------------------------------------
   contador_1s : entity work.cOnes
     generic map(N => 3)  -- 3 dígitos: centenas, decenas, unidades
@@ -60,24 +60,24 @@ begin
     );
 
   ventana : entity work.c33k
-  port map(
-    clk_i   => clk_i,
-    rst_i   => rst_i,
-    ena_i   => '1',
-    Q_BCD   => rst_ones,
-    Q_reg   => ena_ones,
-    cuenta  => open
-  );
+    port map(
+      clk_i   => clk_i,
+      rst_i   => rst_i,
+      ena_i   => '1',
+      Q_BCD   => rst_ones,
+      Q_reg   => ena_ones,
+      cuenta  => open
+    );
 
   --------------------------------------------------------------------------
-  -- Desempaquetado del vector BCD para pasarlo a ASCII
+  -- Desempaquetado del vector BCD
   --------------------------------------------------------------------------
   cen_bcd <= ones(2);
   dec_bcd <= ones(1);
   uni_bcd <= ones(0);
 
   --------------------------------------------------------------------------
-  -- BCD → ASCII ('0' + valor)
+  -- BCD → ASCII
   --------------------------------------------------------------------------
   ascii_cen_sum : entity work.sum_Nb
     generic map(N => 4)
@@ -128,9 +128,9 @@ begin
     );
 
   --------------------------------------------------------------------------
-  -- Display de los caracteres en pantalla
+  -- Display de los caracteres en pantalla (CORREGIDO)
   --------------------------------------------------------------------------
-  disp : entity work.bin8_to_bcd
+  disp : entity work.display_ascii
     port map(
       clk_i      => clk_i,
       rst_i      => rst_i,
