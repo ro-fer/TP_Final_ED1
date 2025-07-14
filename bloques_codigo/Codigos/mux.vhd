@@ -17,7 +17,8 @@ entity mux is
     char2      : in std_logic_vector(7 downto 0);
     char3      : in std_logic_vector(7 downto 0);
     char4      : in std_logic_vector(7 downto 0);
-    pixel_o    : out std_logic
+    pixel_o    : out std_logic;
+    char_sel_o : out std_logic_vector(7 downto 0)
   );
 end entity;
 
@@ -55,5 +56,6 @@ begin
 
   -- Salida de color blanco si hay video y el pixel est� activo
   pixel_o <= rom_pixel and video_on_i;
+  char_sel_o <= char_sel;
 
 end architecture;
