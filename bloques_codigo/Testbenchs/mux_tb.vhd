@@ -15,11 +15,11 @@ architecture sim of mux_tb is
       pix_x_i    : in std_logic_vector(9 downto 0);
       pix_y_i    : in std_logic_vector(9 downto 0);
       video_on_i : in std_logic;
-      char0      : in std_logic_vector(6 downto 0);
-      char1      : in std_logic_vector(6 downto 0);
-      char2      : in std_logic_vector(6 downto 0);
-      char3      : in std_logic_vector(6 downto 0);
-      char4      : in std_logic_vector(6 downto 0);
+      char0      : in std_logic_vector(7 downto 0);
+      char1      : in std_logic_vector(7 downto 0);
+      char2      : in std_logic_vector(7 downto 0);
+      char3      : in std_logic_vector(7 downto 0);
+      char4      : in std_logic_vector(7 downto 0);
       pixel_o    : out std_logic
     );
   end component;
@@ -30,11 +30,11 @@ architecture sim of mux_tb is
   signal pix_x_tb    : std_logic_vector(9 downto 0) := (others => '0');
   signal pix_y_tb    : std_logic_vector(9 downto 0) := (others => '0');
   signal video_on_tb : std_logic := '0';
-  signal char0_tb    : std_logic_vector(6 downto 0) := "0000000";
-  signal char1_tb    : std_logic_vector(6 downto 0) := "0000001";
-  signal char2_tb    : std_logic_vector(6 downto 0) := "0000010";
-  signal char3_tb    : std_logic_vector(6 downto 0) := "0000011";
-  signal char4_tb    : std_logic_vector(6 downto 0) := "0000100";
+  signal char0_tb    : std_logic_vector(7 downto 0) := "00000000";
+  signal char1_tb    : std_logic_vector(7 downto 0) := "00000001";
+  signal char2_tb    : std_logic_vector(7 downto 0) := "00000010";
+  signal char3_tb    : std_logic_vector(7 downto 0) := "00000011";
+  signal char4_tb    : std_logic_vector(7 downto 0) := "00000100";
   signal pixel_o_tb  : std_logic;
 
 begin
