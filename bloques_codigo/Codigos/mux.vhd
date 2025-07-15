@@ -1,6 +1,3 @@
--- mux.vhd
--- Estudiante: Fern�ndez, Roc�o
-
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
@@ -18,14 +15,16 @@ entity mux is
     char3      : in std_logic_vector(7 downto 0);
     char4      : in std_logic_vector(7 downto 0);
     pixel_o    : out std_logic;
-    char_sel_o : out std_logic_vector(7 downto 0)
+    char_sel_o : out std_logic_vector(7 downto 0);
+    sub_fila_o : out std_logic_vector(2 downto 0); 
+    sub_col_o  : out std_logic_vector(2 downto 0)   
   );
 end entity;
 
 architecture rtl of mux is
   -- Subdivisiones 
   signal char_sel     : std_logic_vector(7 downto 0); -- Caracter seleccionado
-  signal char_addr    : std_logic_vector(3 downto 0); -- 5 caracteres ? 0 a 4
+  signal char_addr    : std_logic_vector(3 downto 0); -- Dirección del caracter (4 bits)
   signal sub_fila     : std_logic_vector(2 downto 0); -- Y interna del caracter (bits 6-4)
   signal sub_col      : std_logic_vector(2 downto 0); -- X interna del caracter (bits 2-0)
   signal rom_pixel    : std_logic; -- Salida de la ROM de caracteres
@@ -36,7 +35,11 @@ begin
   sub_col   <= pix_x_i(2 downto 0);
   sub_fila  <= pix_y_i(6 downto 4);
 
-  -- Selector de caracter seg�n zona horizontal
+  -- Salida para poder ver sub_fila y sub_col en simulación
+  sub_fila_o <= sub_fila;
+  sub_col_o  <= sub_col;
+
+  -- Selector de caracter según zona horizontal
   with char_addr select
     char_sel <= char0 when "0000",
                 char1 when "0001",
@@ -48,13 +51,13 @@ begin
   -- Instancia de la ROM de caracteres
   rom_inst: entity work.rom
     port map (
-      char_address => char_addr,
+      char_address => char_addr,  -- Acá va char_addr de 4 bits (no char_sel)
       sub_fila     => sub_fila,
       sub_col      => sub_col,
       rom_data     => rom_pixel
     );
 
-  -- Salida de color blanco si hay video y el pixel est� activo
+  -- Salida de color blanco si hay video y el pixel está activo
   pixel_o <= rom_pixel and video_on_i;
   char_sel_o <= char_sel;
 
