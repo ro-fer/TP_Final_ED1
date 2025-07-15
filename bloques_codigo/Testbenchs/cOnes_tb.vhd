@@ -1,39 +1,41 @@
--- Testbench para el contador de unos (cOnes)
-
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use work.utils.all;
 
 entity cOnes_tb is
 end;
 
 architecture arch of cOnes_tb is
-  constant N : natural := 5;
-  constant M : natural := 4;
 
-  signal clk_i  : std_logic := '0';
-  signal rst_i  : std_logic := '1';
-  signal ena_i  : std_logic := '0';
-  signal BCD_o  : vectBCD(N-1 downto 0);
+  signal clk_unos  : std_logic := '0';
+  signal rst_unos  : std_logic := '1';
+  signal ena_unos  : std_logic := '0';
+
+  signal q_bcd1, q_bcd2, q_bcd3, q_bcd4 : std_logic_vector(3 downto 0);
+  signal q_bcd5, q_bcd6, q_bcd7        : std_logic_vector(3 downto 0);
 
 begin
 
-  -- Instanciación del módulo a testear
+  -- Instancia del DUT (Device Under Test)
   uut: entity work.cOnes
-    generic map (N => N, M => M)
     port map (
-      clk_i => clk_i,
-      rst_i => rst_i,
-      ena_i => ena_i,
-      BCD_o => BCD_o
+      clk_unos => clk_unos,
+      rst_unos => rst_unos,
+      ena_unos => ena_unos,
+      q_bcd1   => q_bcd1,
+      q_bcd2   => q_bcd2,
+      q_bcd3   => q_bcd3,
+      q_bcd4   => q_bcd4,
+      q_bcd5   => q_bcd5,
+      q_bcd6   => q_bcd6,
+      q_bcd7   => q_bcd7
     );
 
-  -- Clock (sí se permite usar un process para esto)
-  clk_i <= not clk_i after 5 ns;
+  -- Clock de 10ns
+  clk_unos <= not clk_unos after 5 ns;
 
-  -- Reset y enable aplicados sin process (uso de after directamente)
-  rst_i <= '1', '0' after 20 ns;
-  ena_i <= '0', '1' after 30 ns;
+  -- Reset y Enable
+  rst_unos <= '1', '0' after 20 ns;
+  ena_unos <= '0', '1' after 30 ns;
 
 end architecture;
