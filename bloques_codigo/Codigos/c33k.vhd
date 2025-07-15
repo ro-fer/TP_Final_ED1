@@ -1,9 +1,5 @@
 -- Contador de 3 300 000 bits
--- Estudiante: Fernández, Rocío
-
--- Contador hasta 33000
--- Estudiante: Fernández, Rocío
-
+-- Estudiante: Fernández, Rocío 
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
