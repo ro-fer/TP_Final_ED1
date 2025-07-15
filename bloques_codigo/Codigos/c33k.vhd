@@ -1,80 +1,54 @@
--- Contador de 3 300 000 bits
--- Estudiante: Fernández, Rocío 
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity c33k is
-  generic(
-    N: natural := 22 -- Bits del contador
-  );
-  port(
+  port (
     clk_i   : in std_logic;
     rst_i   : in std_logic;
     ena_i   : in std_logic;
     Q_BCD   : out std_logic;
     Q_reg   : out std_logic;
-    cuenta  : out std_logic_vector(N-1 downto 0) -- salida para ver el contador
+    cuenta  : out std_logic_vector(21 downto 0)
   );
 end entity;
 
 architecture c33k_arq of c33k is
 
-  signal rst_aux     : std_logic;
-  signal Dinc_aux    : std_logic_vector(N-1 downto 0);
-  signal Qreg_aux    : std_logic_vector(N-1 downto 0);
-  signal QBCD_aux    : std_logic;
+  component cont_bin_gen is
+    port (
+      clk_bin_gen : in std_logic;
+      ena_bin_gen : in std_logic;
+      rst_bin_gen : in std_logic;
+      salida_gen  : out std_logic_vector(21 downto 0)
+    );
+  end component;
 
-  constant VAL_33000  : std_logic_vector(N-1 downto 0) := std_logic_vector(to_unsigned(33000, N));
-  constant VAL_32999  : std_logic_vector(N-1 downto 0) := std_logic_vector(to_unsigned(32999, N));
+  signal salida_cont : std_logic_vector(21 downto 0);
+  signal salida_reg  : std_logic;
+  signal salida_q    : std_logic;
 
 begin
 
-  -- Registro
-  reg1: entity work.reg_Nb
-    generic map(N => N)
+  contador: cont_bin_gen
     port map(
-      clk_i => clk_i,
-      rst_i => rst_aux,
-      ena_i => ena_i,
-      D_reg => Dinc_aux,
-      Q_reg => Qreg_aux
+      clk_bin_gen => clk_i,
+      ena_bin_gen => ena_i,
+      rst_bin_gen => rst_i or salida_reg,
+      salida_gen  => salida_cont
     );
 
-  -- Sumador
-  sumNb0: entity work.sum_Nb
-    generic map(N => N)
-    port map(
-      a_i => Qreg_aux,
-      b_i => std_logic_vector(to_unsigned(1, N)),
-      c_i => '0',
-      s_o => Dinc_aux,
-      c_o => open
-    );
+  salida_reg <= (
+    salida_cont(21) and salida_cont(20) and not salida_cont(19) and not salida_cont(18) and
+    salida_cont(17) and not salida_cont(16) and not salida_cont(15) and salida_cont(14) and
+    not salida_cont(13) and salida_cont(12) and salida_cont(11) and not salida_cont(10) and
+    salida_cont(9) and not salida_cont(8) and salida_cont(7) and not salida_cont(6) and
+    not salida_cont(5) and salida_cont(4) and salida_cont(3) and salida_cont(2) and
+    salida_cont(1) and salida_cont(0)
+  );
 
-  -- Comparador para 33000
-  compNb0: entity work.comp_Nb
-    generic map(N => N)
-    port map(
-      a => Qreg_aux,
-      b => VAL_33000,
-      s => QBCD_aux
-    );
-
-  -- Comparador para 32999
-  compNb1: entity work.comp_Nb
-    generic map(N => N)
-    port map(
-      a => Qreg_aux,
-      b => VAL_32999,
-      s => Q_reg
-    );
-
-  -- Reset del contador
-  rst_aux <= rst_i or QBCD_aux;
-
-  -- Salidas
-  Q_BCD   <= QBCD_aux;
-  cuenta  <= Qreg_aux;
+  Q_BCD  <= salida_reg;
+  Q_reg  <= salida_q;
+  cuenta <= salida_cont;
 
 end architecture;
