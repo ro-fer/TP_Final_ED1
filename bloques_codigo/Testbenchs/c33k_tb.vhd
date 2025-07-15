@@ -12,7 +12,6 @@ architecture c33k_tb_arq of c33k_tb is
       rst_i   : in std_logic;
       ena_i   : in std_logic;
       Q_BCD   : out std_logic;
-      Q_reg   : out std_logic;
       cuenta  : out std_logic_vector(21 downto 0)
     );
   end component;
@@ -21,7 +20,6 @@ architecture c33k_tb_arq of c33k_tb is
   signal rst_tb     : std_logic := '1';
   signal ena_tb     : std_logic := '0';
   signal Q_BCD_tb   : std_logic;
-  signal Q_reg_tb   : std_logic;
   signal cuenta_tb  : std_logic_vector(21 downto 0);
 
 begin
@@ -36,7 +34,6 @@ begin
       rst_i   => rst_tb,
       ena_i   => ena_tb,
       Q_BCD   => Q_BCD_tb,
-      Q_reg   => Q_reg_tb,
       cuenta  => cuenta_tb
     );
 
