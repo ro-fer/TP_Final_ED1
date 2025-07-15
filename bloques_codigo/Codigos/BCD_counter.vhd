@@ -14,52 +14,67 @@ entity BCD_counter is
     clk_i: in std_logic; -- clock 
     rst_i: in std_logic; -- Reset 
     ena_i: in std_logic; -- Enable 
-    count: out std_logic_vector(N-1 downto 0); -- Valor actual del contador
-    max: out std_logic -- Indica si se alcanzó el valor máximo (9)
+    q_bcd: out std_logic_vector(N-1 downto 0); -- Valor actual del contador
+
   );
 end;
 architecture BCD_counter_arq of BCD_counter is
-
-  signal Qreg_aux: std_logic_vector(N-1 downto 0);
-  signal Dinc_aux: std_logic_vector(N-1 downto 0);
-  signal next_count: std_logic_vector(N-1 downto 0);
-  constant b_aux: std_logic_vector(N-1 downto 0) := "0001";
-  constant VAL9: std_logic_vector(N-1 downto 0) := std_logic_vector(to_unsigned(9, N));
-  signal comp_aux: std_logic;
+  component ffd is 
+    port(
+        clk_i   : in std_logic;
+        rst_i   : in std_logic;
+        ena_i   : in std_logic;
+        d_i     : in std_logic;
+        q_o     : out std_logic
+    );
+    end component;
+  -- ent y sal de ffd
+  signal d_i  : bit_vector(3 downto 0) := "0000";
+  signal q_o  : bit_vector(3 downto 0) := "0000";
 
 begin
+  FF0: ffd 
+      port map (
+      clk_i   => clk_bcd,
+      rst_i   => rst_bcd,
+      ena_i   => ena_bcd,
+      d_i     => d_i(0),
+      q_o     => q_o(0) 
+  );
 
-  sumNb0: entity work.sum_Nb
-    generic map(N => N)
-    port map(
-      a_i => Qreg_aux,
-      b_i => b_aux,
-      c_i => '0',
-      s_o => Dinc_aux,
-      c_o => open
-    );
+  FF1: ffd 
+      port map (
+      clk_i   => clk_bcd,
+      rst_i   => rst_bcd,
+      ena_i   => ena_bcd,
+      d_i     => d_i(1),
+      q_o     => q_o(1) 
+  );
 
-  compNb0: entity work.comp_Nb
-    generic map(N => N)
-    port map(
-      a => Qreg_aux,
-      b => VAL9,
-      s => comp_aux
-    );
+  FF2: ffd 
+      port map (
+      clk_i   => clk_bcd,
+      rst_i   => rst_bcd,
+      ena_i   => ena_bcd,
+      d_i     => d_i(2),
+      q_o     => q_o(2) 
+  );
 
-  next_count <= (others => '0') when comp_aux = '1' else Dinc_aux;
+  FF3: ffd 
+      port map (
+      clk_i   => clk_bcd,
+      rst_i   => rst_bcd,
+      ena_i   => ena_bcd,
+      d_i     => d_i(3),
+      q_o     => q_o(3) 
+  );
 
-  reg0: entity work.reg_Nb
-    generic map(N => N)
-    port map(
-      clk_i => clk_i,
-      rst_i => rst_i,
-      ena_i => ena_i,
-      D_reg => next_count,
-      Q_reg => Qreg_aux
-    );
+  d_i(0) <= not q_o(0);
+  d_i(1) <= (not q_o(0) and q_o(1)) or (q_o(0) and not q_o(1) and not q_o(3));
+  d_i(2) <= (not q_o(1) and q_o(2)) or (q_o(0) and q_o(1) and not q_o(2)) or (not q_o(0) and q_o(1) and q_o(2));
+  d_i(3) <= (q_o(0) and q_o(1) and q_o(2)) or (not q_o(0) and not q_o(2) and q_o(3));
 
-  count <= Qreg_aux;
-  max <= comp_aux;
+  q_bcd <= q_o;
+  
 
 end architecture;
