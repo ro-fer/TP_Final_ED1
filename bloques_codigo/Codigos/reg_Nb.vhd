@@ -27,7 +27,7 @@ architecture reg_Nb_arq of reg_Nb is
   component registro is
     port (
       clk_r : in std_logic;
-      rst_r : in std_logic := '0';
+      rst_r : in std_logic;
       ena_r : in std_logic;
       d_r   : in std_logic_vector(3 downto 0);
       q_r   : out std_logic_vector(3 downto 0)
