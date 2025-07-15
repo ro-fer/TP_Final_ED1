@@ -8,7 +8,6 @@ entity c33k is
     rst_i   : in std_logic;
     ena_i   : in std_logic;
     Q_BCD   : out std_logic;
-    Q_reg   : out std_logic;
     cuenta  : out std_logic_vector(21 downto 0)
   );
 end entity;
@@ -48,7 +47,6 @@ begin
   );
 
   Q_BCD  <= salida_reg;
-  Q_reg  <= salida_q;
   cuenta <= salida_cont;
 
 end architecture;
