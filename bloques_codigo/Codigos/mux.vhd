@@ -1,9 +1,7 @@
 --mux
 -- le llegan 3 datos , los otros 3 son "."  " " y "V"
 -- sal --> 6 datos
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
+
 
 entity mux is
     port(

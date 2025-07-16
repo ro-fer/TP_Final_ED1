@@ -1,8 +1,6 @@
 -- Registro con 3 registros internos de 4 bits
 -- Estudiante: Fernández, Rocío
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
+
 
 entity reg_Nb is
   port (

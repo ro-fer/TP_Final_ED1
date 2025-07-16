@@ -1,6 +1,4 @@
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
+
 
 entity ADC_SD_tb is
 end;

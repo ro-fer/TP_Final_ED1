@@ -1,7 +1,5 @@
 -- Test comparador de N bits
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
+
 
 entity comp_Nb_tb is end;
 architecture arch of comp_Nb_tb is

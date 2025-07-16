@@ -1,7 +1,4 @@
 -- contador binario N bits
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
 
 entity cont_bin is
     generic (

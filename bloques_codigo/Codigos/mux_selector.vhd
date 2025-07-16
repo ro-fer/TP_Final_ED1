@@ -1,9 +1,6 @@
 -- LOGICA (MUX) 
 -- entrada --> utlimas 3 posiciones del contH (elije posicion del monitor)
 -- selector --> utlimas 3 posiciones del cont v (elije franja del monitor)
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
 
 entity mux_selector is 
     port(

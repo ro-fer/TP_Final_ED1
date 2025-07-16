@@ -1,7 +1,5 @@
 -- Test contador BCD
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
+
 entity contador_bcd_tb is
 end;
 

@@ -1,9 +1,7 @@
 -- Flip - Flop D con enable y reset
 -- Estudiante: Fernandez, Rocio
-library IEEE;
-use IEEE.bit_1164.all;
-use IEEE.numeric_std.all;
 
+library IEEE;
 entity ffd is
 	port (
 		clk_i : in bit; -- Clock
@@ -15,15 +13,15 @@ entity ffd is
 end entity;
 
 architecture ffd_arc of ffd is
-begin
-	process(clk_i)
-	begin
-		if rising_edge(clk_i) then 
-			if rst_i = '1' then         -- Reset activo
-				q_o <= '0';
-			elsif ena_i = '1' then      -- Enable activo
-				q_o <= d_i;
-			end if;
-		end if;
-	end process;
-end architecture;
+begin 
+    process(clk_i)
+    begin
+        if (clk_i'event and clk_i = '1') then 
+            if rst_i = '1' then         -- si el reset esta prendido pone salida en cero
+                q_o <= '0';
+            elsif ena_i = '1' then      -- si el habilitador esta prendido pone en la salida el valor del dato de entrada 
+                q_o <= d_i;
+            end if;
+        end if;
+    end process;
+end;
