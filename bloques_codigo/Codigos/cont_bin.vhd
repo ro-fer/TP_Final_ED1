@@ -7,10 +7,10 @@ entity cont_bin is
         N : natural := 2
     );
     port (
-        clk_i : in std_logic;
-        rst_i : in std_logic;
-        ena_i : in std_logic;
-        q_o   : out std_logic_vector(N-1 downto 0)
+        clk_i : in bit;
+        rst_i : in bit;
+        ena_i : in bit;
+        q_o   : out bit_vector(N-1 downto 0)
     );
 end entity;
 
@@ -29,6 +29,6 @@ begin
         end if;
     end process;
 
-    q_o <= std_logic_vector(count);
+    q_o <= bit_vector(count);
 
 end architecture;
