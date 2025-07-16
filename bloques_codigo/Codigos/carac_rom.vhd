@@ -1,155 +1,157 @@
 --ROM de caracteres
 -- Estudiante: Fernández, Rocío
 
-library IEEE ;
-use IEEE.std_logic_1164.all ;
-use IEEE.numeric_std.all;
 
+entity rom is 
+    port(
+        char_address : bit_vector(3 downto 0); -- 4 digitos del medio del contH
+        font_col     : bit_vector(2 downto 0); -- 3 digitos , viene dado por los 3 bits menos sig del contH
+        font_row     : bit_vector(2 downto 0);
+        rom_out      : out bit
+    ); 
+end;
 
-entity rom is
+architecture rom_arq of rom is 
+    -- defino vector de vectores
+    -- tengo 13 caracteres (0,1,2,3,4,5,6,7,8,9,'.','V',' ') con 8 filas cada uno (13*8=104)   
+    type matriz is array (0 to 103) of bit_vector(0 to 7);
 
-  generic(
+    signal concate : bit_vector(6 downto 0); -- concateno direccion con la fila, 3+4=7
 
-    A : integer := 4 ; -- bits para direccion
-    F : integer := 3 ; --  bits para fila
-    C : integer := 3   --  bits para columna
+    -- necesito una funcion para convertir vector a entero
+    function conversion_entero( word: bit_vector) return integer is 
+        variable resultado: integer := 0; -- inicializo en 0
+    begin 
+        for i in word'range loop
+            if(word(i) = '1') then 
+                resultado := resultado + 2**i;
+            end if;
+        end loop ;
+        return resultado;
+    end conversion_entero;
 
-  ) ;
+    constant ROM_m: matriz := (
 
-  port (
+        "00000000",
+		"00111100",
+		"01000010",
+		"01000010", --0
+		"01000010",
+		"01000010",
+		"00111100",
+		"00000000", 
+		
+		"00000000",
+		"00001000",
+		"00011000",
+		"00101000", --1
+		"00001000", 
+		"00001000",
+		"00111100",
+		"00000000",
+		
+		"00000000",
+		"00111100",
+		"01000010",
+		"00000100", --2
+		"00001000",
+		"00110000",
+		"01111110",
+		"00000000",
 
-    char_address : in bit_vector ( A-1 downto 0 ) ; -- direccion del caract
-    font_row : in     bit_vector ( F-1 downto 0 ) ; -- fila dentro del caract
-    font_col : in     bit_vector ( C-1 downto 0 ) ; -- col dentro de la fila
-    rom_out : out     bit  -- salida : '1' pixel activo o '0' pixel inactivo
-  );
+		"00000000",
+		"01111100",
+		"00000010",
+		"00111110", --3
+		"00000010",
+		"00000010",
+		"01111100",
+		"00000000",
 
-end ;
+		"00000000",
+		"00001100",
+		"00010100",
+		"00100100", --4
+		"01111110",
+		"00000100",
+		"00000100",
+		"00000000",
 
-architecture rom_arq of rom is
+		"00000000",
+		"01111100",
+		"01000000",
+		"01111100", --5
+		"00000010",
+		"00000010",
+		"01111100",
+		"00000000",
 
-  -- Def de tipos para la ROM
-  subtype subfila is std_logic_vector ( 0 to 7 ) ; -- Una fila de 8 píxeles (0=blanco, 1=negro)
-  type memoria is array ( 0 to 127 ) of subfila ; -- Memoria: 13 caracteres x 8 filas + padding
+		"00000000",
+		"00111100",
+		"01000000",
+		"01111100", --6
+		"01000010",
+		"01000010",
+		"00111100",
+		"00000000",
 
-  signal ROM : memoria := (
-  -- cero
-          "01111110",
-          "01000010",
-          "01000010",
-          "01000010",
-          "01000010",
-          "01000010",
-          "01111110",
-          "00000000",
-  -- uno
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000000",
-  -- dos
-          "01111110",
-          "00000010",
-          "00000010",
-          "01111110",
-          "01000000",
-          "01000000",
-          "01111110",
-          "00000000",
-  -- tres
-          "01111110",
-          "00000010",
-          "00000010",
-          "00111110",
-          "00000010",
-          "00000010",
-          "01111110",
-          "00000000",
-  -- cuatro
-          "01000010",
-          "01000010",
-          "01000010",
-          "01000010",
-          "01111110",
-          "00000010",
-          "00000010",
-          "00000000",
-  -- cinco
-          "01111110",
-          "01000000",
-          "01000000",
-          "01111110",
-          "00000010",
-          "00000010",
-          "01111110",
-          "00000000",
-  -- seis
-          "01111110",
-          "01000000",
-          "01000000",
-          "01111110",
-          "01000010",
-          "01000010",
-          "01111110",
-          "00000000",
-  -- siete
-          "01111110",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000010",
-          "00000000",
-  -- ocho
-          "00111100",
-          "01000010",
-          "01000010",
-          "01111110",
-          "01000010",
-          "01000010",
-          "00111100",
-          "00000000",
-  -- nueve
-          "01111110",
-          "01000010",
-          "01000010",
-          "01111110",
-          "00000010",
-          "00000010",
-          "01111110",
-          "00000000",
-  -- punto
-          "00000000",
-          "00000000",
-          "00000000",
-          "00000000",
-          "00000000",
-          "00011000",
-          "00011000",
-          "00000000",
-  -- volt
-          "01000010",
-          "01000010",
-          "01000010",
-          "00100100",
-          "00100100",
-          "00011000",
-          "00011000",
-          "00000000",
-  -- Espacio en blanco (resto de posiciones)
-        others => "00000000"
+		"00000000",
+		"01111110",
+		"00000100",
+		"00001000", --7
+		"00010000",
+		"00100000",
+		"00100000",
+		"00000000",
 
-          );
+		"00000000",
+		"00111100",
+		"01000010",
+		"01111110", --8
+		"01000010",
+		"01000010",
+		"00111100",
+		"00000000",
 
-  signal concate : unsigned (6 downto 0) ; -- direc concatenada
+		"00000000",
+		"00111100",
+		"01000010",
+		"01000010", --9
+		"00111110",
+		"00000010",
+		"00111100",
+		"00000000",
 
-  begin
-  concate <= char_address & font_row; -- concateno direccion con fila 
-  rom_out <= ROM_m(conversion_entero(concate))(conversion_entero(font_col));
+		"00000000",
+		"00000000",
+		"00000000",
+		"00000000", --punto
+		"00000000",
+		"00011000",
+		"00011000",
+		"00000000",
 
+		"00000000",
+		"01000010",
+		"01000010",
+		"01000010", --V 
+		"00100100",
+		"00100100",
+		"00011000",
+		"00000000",
+
+		"00000000",
+		"00000000",
+		"00000000",
+		"00000000", --blanco
+		"00000000",
+		"00000000",
+		"00000000",
+		"00000000"
+		);
+
+begin
+
+    concate <= char_address & font_row; -- concateno direccion con fila 
+    rom_out <= ROM_m(conversion_entero(concate))(conversion_entero(font_col));
 end;
