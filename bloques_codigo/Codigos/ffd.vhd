@@ -1,7 +1,6 @@
 -- Flip - Flop D con enable y reset
 -- Estudiante: Fernandez, Rocio
-library IEEE;
-use IEEE.std_logic_1164.all;
+
 
 entity ffd is
 	port (
