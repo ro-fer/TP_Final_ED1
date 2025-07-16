@@ -8,20 +8,20 @@
 --              Actualizado: 26/05/2025
 ----------------------------------------------------------------------------------
 library IEEE;
-use IEEE.std_logic_1164.all;
+use IEEE.bit_1164.all;
 use IEEE.numeric_std.all;
 
 entity Voltimetro_toplevel is
     port(
-        clk_i           : in std_logic;
-        rst_i           : in std_logic;
-        data_volt_in_i  : in std_logic;
-        data_volt_out_o : out std_logic;
-        hs_o            : out std_logic;
-        vs_o            : out std_logic;
-        red_o           : out std_logic;
-        grn_o           : out std_logic;
-        blu_o           : out std_logic
+        clk_i           : in bit;
+        rst_i           : in bit;
+        data_volt_in_i  : in bit;
+        data_volt_out_o : out bit;
+        hs_o            : out bit;
+        vs_o            : out bit;
+        red_o           : out bit;
+        grn_o           : out bit;
+        blu_o           : out bit
     );
 end Voltimetro_toplevel;
 
@@ -30,15 +30,15 @@ architecture Voltimetro_toplevel_arq of Voltimetro_toplevel is
     -- Componente Voltimetro
     component Voltimetro is
         port(
-            clk_i           : in std_logic;
-            rst_i           : in std_logic;
-            data_volt_in_i  : in std_logic;
-            data_volt_out_o : out std_logic;
-            hs_o            : out std_logic;
-            vs_o            : out std_logic;
-            red_o           : out std_logic;
-            grn_o           : out std_logic;
-            blu_o           : out std_logic
+            clk_i           : in bit;
+            rst_i           : in bit;
+            data_volt_in_i  : in bit;
+            data_volt_out_o : out bit;
+            hs_o            : out bit;
+            vs_o            : out bit;
+            red_o           : out bit;
+            grn_o           : out bit;
+            blu_o           : out bit
         );
     end component;
 
@@ -48,16 +48,16 @@ architecture Voltimetro_toplevel_arq of Voltimetro_toplevel is
             N : natural := 2
         );
         port(
-            clk_i : in std_logic;
-            rst_i : in std_logic;
-            ena_i : in std_logic;
-            q_o   : out std_logic_vector(N-1 downto 0)
+            clk_i : in bit;
+            rst_i : in bit;
+            ena_i : in bit;
+            q_o   : out bit_vector(N-1 downto 0)
         );
     end component;
 
     -- Señales internas
-    signal cuenta    : std_logic_vector(1 downto 0);
-    signal clk25MHz  : std_logic;
+    signal cuenta    : bit_vector(1 downto 0);
+    signal clk25MHz  : bit;
 
 begin
 
