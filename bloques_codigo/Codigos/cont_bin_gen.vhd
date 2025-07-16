@@ -1,13 +1,12 @@
--- CONTADOR BINARIO DE 22 bits
-library IEEE;
-use IEEE.std_logic_1164.all;
+-- CONTADOR BINARIO DE 16 bits
+
 
 entity cont_bin_gen is
   port (
     clk_bin_gen : in bit;
     ena_bin_gen : in bit;
     rst_bin_gen : in bit;
-    salida_gen  : out bit_vector(21 downto 0)
+    salida_gen  : out bit_vector(N-1 downto 0)
   );
 end entity;
 
@@ -23,9 +22,9 @@ architecture cont_bin_gen_arq of cont_bin_gen is
     );
   end component;
 
-  signal salida : bit_vector(21 downto 0);
-  signal ands   : bit_vector(21 downto 0);
-  signal xors   : bit_vector(21 downto 0);
+  signal salida : bit_vector(N-1 downto 0);
+  signal ands   : bit_vector(N-1 downto 0);
+  signal xors   : bit_vector(N-1 downto 0);
 
 begin
 
@@ -97,30 +96,30 @@ begin
   ands(15) <= ands(14) and salida(14);
   xors(15) <= ands(15) xor salida(15);
   ffd15: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(15), salida(15));
-
-  ands(16) <= ands(15) and salida(15);
-  xors(16) <= ands(16) xor salida(16);
-  ffd16: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(16), salida(16));
-
-  ands(17) <= ands(16) and salida(16);
-  xors(17) <= ands(17) xor salida(17);
-  ffd17: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(17), salida(17));
-
-  ands(18) <= ands(17) and salida(17);
-  xors(18) <= ands(18) xor salida(18);
-  ffd18: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(18), salida(18));
-
-  ands(19) <= ands(18) and salida(18);
-  xors(19) <= ands(19) xor salida(19);
-  ffd19: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(19), salida(19));
-
-  ands(20) <= ands(19) and salida(19);
-  xors(20) <= ands(20) xor salida(20);
-  ffd20: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(20), salida(20));
-
-  ands(21) <= ands(20) and salida(20);
-  xors(21) <= ands(21) xor salida(21);
-  ffd21: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(21), salida(21));
+  -- en un momento hice de 22 chequear
+  -- ands(16) <= ands(15) and salida(15);
+  -- xors(16) <= ands(16) xor salida(16);
+  -- ffd16: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(16), salida(16));
+-- 
+  -- ands(17) <= ands(16) and salida(16);
+  -- xors(17) <= ands(17) xor salida(17);
+  -- ffd17: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(17), salida(17));
+-- 
+  -- ands(18) <= ands(17) and salida(17);
+  -- xors(18) <= ands(18) xor salida(18);
+  -- ffd18: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(18), salida(18));
+-- 
+  -- ands(19) <= ands(18) and salida(18);
+  -- xors(19) <= ands(19) xor salida(19);
+  -- ffd19: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(19), salida(19));
+-- 
+  -- ands(20) <= ands(19) and salida(19);
+  -- xors(20) <= ands(20) xor salida(20);
+  -- ffd20: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(20), salida(20));
+-- 
+  -- ands(21) <= ands(20) and salida(20);
+  -- xors(21) <= ands(21) xor salida(21);
+  -- ffd21: ffd port map(clk_bin_gen, rst_bin_gen, '1', xors(21), salida(21));
 
   salida_gen <= salida;
 
