@@ -1,6 +1,6 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+--mux
+-- le llegan 3 datos , los otros 3 son "."  " " y "V"
+-- sal --> 6 datos
 
 entity mux is
     port(
