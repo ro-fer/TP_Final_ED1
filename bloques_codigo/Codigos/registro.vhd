@@ -1,7 +1,5 @@
 -- REGISTRO 4 BITS
 
-library IEEE;
-use IEEE.std_logic_1164.all;
 
 entity registro is
   port(
