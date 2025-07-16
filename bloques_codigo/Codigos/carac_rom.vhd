@@ -18,11 +18,10 @@ entity rom is
 
   port (
 
-    char_address : in std_logic_vector ( A-1 downto 0 ) ; -- direccion del caract
-    sub_fila : in std_logic_vector ( F-1 downto 0 ) ; -- fila dentro del caract
-    sub_col : in std_logic_vector ( C-1 downto 0 ) ; -- col dentro de la fila
-    rom_data : out std_logic  -- salida : '1' pixel activo o '0' pixel inactivo
-
+    char_address : in bit_vector ( A-1 downto 0 ) ; -- direccion del caract
+    font_row : in     bit_vector ( F-1 downto 0 ) ; -- fila dentro del caract
+    font_col : in     bit_vector ( C-1 downto 0 ) ; -- col dentro de la fila
+    rom_out : out     bit  -- salida : '1' pixel activo o '0' pixel inactivo
   );
 
 end ;
@@ -147,12 +146,10 @@ architecture rom_arq of rom is
 
           );
 
-  signal char_addr_aux : unsigned (6 downto 0) ; -- direc concatenada
+  signal concate : unsigned (6 downto 0) ; -- direc concatenada
 
   begin
-  -- calcula la direc en la ROM
-    char_addr_aux <= unsigned(char_address) & unsigned(sub_fila) ;
-    -- Obtiene el bit específico de la fila y columna:
-    rom_data <= ROM(to_integer(char_addr_aux))(to_integer(unsigned(sub_col))) ;
+  concate <= char_address & font_row; -- concateno direccion con fila 
+  rom_out <= ROM_m(conversion_entero(concate))(conversion_entero(font_col));
 
 end;
