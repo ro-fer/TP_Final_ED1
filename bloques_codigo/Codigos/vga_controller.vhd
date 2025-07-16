@@ -7,76 +7,152 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity vga_controller is
+
   port(
-    clk_i     : in  std_logic;                  -- Clock
-    rst_i     : in  std_logic;                  -- Reset
-    hsync_o   : out std_logic;                  
-    vsync_o   : out std_logic;                
-    video_on  : out std_logic;                  -- '1' si estamos en la zona visible
-    pix_x_o   : out std_logic_vector(9 downto 0); -- Coordenada X del píxel (0 a 639)
-    pix_y_o   : out std_logic_vector(9 downto 0)  -- Coordenada Y del píxel (0 a 479)
+    clk_vga     : in  bit; -- Clock
+    rst_vga     : in  bit; -- Reset
+    ena_vga      : in bit;
+    r_i_vga      : in bit;
+    g_i_vga      : in bit; 
+    b_i_vga      : in bit; 
+    -- salidas
+    hsync_vga   : out  bit;                  
+    vsync_vga   : out  bit;                
+    vidon_vga  : out   bit;       -- '1' si estamos en la zona visible
+    vvidon_vga   : out bit;
+    r_o_vga      : out bit;
+    g_o_vga      : out bit;
+    b_o_vga      : out bit;
+    selector_vga : out bit_vector(2 downto 0);
+    pixelx_vga   : out bit_vector(2 downto 0);
+    pixely_vga   : out bit_vector(2 downto 0)
   );
 end entity;
 
 architecture rtl of vga_controller is
 
-  -- Parámetros para resolución 640x480 @60Hz con clock de 25 MHz
-  constant H_DISPLAY   : integer := 640;
-  constant H_FRONT     : integer := 16;
-  constant H_SYNC      : integer := 96;
-  constant H_BACK      : integer := 48;
-  constant H_MAX       : integer := H_DISPLAY + H_FRONT + H_SYNC + H_BACK;
+  component hsync is 
+        port (
+            ena_hsync   : in  bit;
+            rst_hsync   : in  bit;
+            clk_hsync   : in  bit;
+            h_sync      : out bit;
+            h_vidon     : out bit;
+            ena_cv      : out bit;
+            cont_h      : out bit_vector(9 downto 0)
+        );
+    
+    end component;
 
-  constant V_DISPLAY   : integer := 480;
-  constant V_FRONT     : integer := 10;
-  constant V_SYNC      : integer := 2;
-  constant V_BACK      : integer := 33;
-  constant V_MAX       : integer := V_DISPLAY + V_FRONT + V_SYNC + V_BACK;
+    component vsync is 
+        port (
+            ena_vsync   : in  bit;
+            rst_vsync   : in  bit;
+            clk_vsync   : in  bit;
+            v_sync      : out bit;
+            v_vidon     : out bit;
+            cont_v      : out bit_vector(9 downto 0)
+        );
+    end component;
 
-  signal h_count : unsigned(9 downto 0) := (others => '0');
-  signal v_count : unsigned(9 downto 0) := (others => '0');
+    component mux_color is 
+        port(
+            RGB : in  bit;
+            B   : in  bit;
+            sel : in  bit;
+            sal : out bit
+        );
+    end component;
+
+    component mux_selector is 
+        port(
+            A_selector   : in  bit_vector(2 downto 0);
+            B_selector   : in  bit_vector(2 downto 0);
+            sel_selector : in  bit;
+            sal_selector : out bit_vector(2 downto 0)
+        );
+    end component;
+
+    signal cont_h_vga   : bit_vector(9 downto 0) := (9 downto 0 => '0'); -- salida cont horiz
+    signal cont_v_vga   : bit_vector(9 downto 0) := (9 downto 0 => '0'); -- salida cont vert
+    signal ena_cv_vga   : bit := '0';                                    -- fin de cuenta CH q habilita el CV   
+    signal h_vidon_vga  : bit := '0';                                    -- salida vidon del CH   
+    signal v_vidon_vga  : bit := '0';                                    -- salida vidon del CV
+    signal vidon_s_vga  : bit := '0';                                    -- indicador zona de video, va al selector de los mux_color
+    signal B_selec_vga  : bit_vector(2 downto 0) := (2 downto 0 => '0'); -- dato de entrada de mux_delector
+    signal selec_cv_vga : bit := '0';                                    -- '1' si esta en la franja del monitor q quiero ver, llega de los ultimos digitos del contador vert
+
 
 begin
 
-  -- Contador horizontal
-  process(clk_i)
-  begin
-    if rising_edge(clk_i) then
-      if rst_i = '1' then
-        h_count <= (others => '0');
-      elsif h_count = H_MAX - 1 then
-        h_count <= (others => '0');
-      else
-        h_count <= h_count + 1;
-      end if;
-    end if;
-  end process;
+  sincronismo_horizontal: hsync
+        port map(
+            ena_hsync   => ena_vga, 
+            rst_hsync   => rst_vga, 
+            clk_hsync   => clk_vga, 
+            h_sync      => hsync_vga, 
+            h_vidon     => h_vidon_vga, 
+            ena_cv      => ena_cv_vga, 
+            cont_h      => cont_h_vga 
+        );
+    
+    sincronismo_vertical: vsync
+        port map(
+            ena_vsync   => ena_cv_vga,
+            rst_vsync   => rst_vga,
+            clk_vsync   => clk_vga,
+            v_sync      => vsync_vga,
+            v_vidon     => v_vidon_vga,
+            cont_v      => cont_v_vga
+        );
 
-  -- Contador vertical
-  process(clk_i)
-  begin
-    if rising_edge(clk_i) then
-      if rst_i = '1' then
-        v_count <= (others => '0');
-      elsif h_count = H_MAX - 1 then
-        if v_count = V_MAX - 1 then
-          v_count <= (others => '0');
-        else
-          v_count <= v_count + 1;
-        end if;
-      end if;
-    end if;
-  end process;
+    -- vidon es la interseccion entre el vidon_h y el vidon_v
+    -- vidon_s_vga es el selector de los mux_color
+    vidon_s_vga     <= v_vidon_vga and h_vidon_vga;
 
-  -- Señales de sincronismo
-  hsync_o <= '0' when (h_count >= (H_DISPLAY + H_FRONT) and h_count < (H_DISPLAY + H_FRONT + H_SYNC)) else '1';
-  vsync_o <= '0' when (v_count >= (V_DISPLAY + V_FRONT) and v_count < (V_DISPLAY + V_FRONT + V_SYNC)) else '1';
+    -- necesito 3 mux_color, uno para cada color. le paso un color, si el selector es 1 me saca el color (RGB), si el selector es 0 saca B
+    mux_r: mux_color
+        port map(
+            RGB => r_i_vga,
+            B   => '0',
+            sel => vidon_s_vga,
+            sal => r_o_vga
+        );
 
-  -- Zona visible
-  video_on <= '1' when (h_count < H_DISPLAY and v_count < V_DISPLAY) else '0';
+    mux_g: mux_color
+        port map(
+            RGB => g_i_vga,
+            B   => '0',
+            sel => vidon_s_vga,
+            sal => g_o_vga
+        );
 
-  -- Coordenadas actuales del píxel
-  pix_x_o <= std_logic_vector(h_count);
-  pix_y_o <= std_logic_vector(v_count);
+    mux_b: mux_color
+        port map(
+            RGB => b_i_vga,
+            B   => '0',
+            sel => vidon_s_vga,
+            sal => b_o_vga
+        );
+
+    B_selec_vga     <= cont_h_vga(9 downto 7); -- 3 + significativos
+    selec_cv_vga    <= (not(cont_v_vga(9)) and not(cont_v_vga(8)) and (cont_v_vga(7))); -- aca elijo la franja que quiero mostrar (000,001,010,011) --> elijo la 2da (001)
+
+    -- este selector cuando esta en 0, saca '111' (blanco o espacio). cuando está en 1 saca los 3 bits mas significativos del contador H
+    -- es decir, si estoy en la SEGUNDA FRANJA (contV = "001xxxxxxx") me va a mostrar los datos del contH
+    mux_selec: mux_selector 
+        port map(
+            A_selector   => "111",
+            B_selector   => B_selec_vga, -- ultimos 3 digitos del CH
+            sel_selector => selec_cv_vga,
+            sal_selector => selector_vga
+        );
+
+    
+    vidon_vga       <= not vidon_s_vga; 
+    vvidon_vga <= v_vidon_vga;
+
+    pixelx_vga      <= cont_h_vga(6 downto 4); -- saca la posicion de pixel x, indica en que COLUMNA esta, va a la ROM directo
+    pixely_vga      <= cont_v_vga(6 downto 4); -- saca la posicion de pixel y, indica en que FILA esta, va a la ROM directo
 
 end architecture;
