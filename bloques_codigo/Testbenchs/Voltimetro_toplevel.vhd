@@ -1,5 +1,5 @@
 library IEEE;
-use IEEE.std_logic_1164.all;
+use IEEE.bit_1164.all;
 use IEEE.numeric_std.all;
 
 entity Voltimetro_toplevel_tb is
@@ -10,28 +10,28 @@ architecture sim of Voltimetro_toplevel_tb is
     -- Componente bajo prueba (DUT)
     component Voltimetro_toplevel is
         port(
-            clk_i           : in std_logic;
-            rst_i           : in std_logic;
-            data_volt_in_i  : in std_logic;
-            data_volt_out_o : out std_logic;
-            hs_o            : out std_logic;
-            vs_o            : out std_logic;
-            red_o           : out std_logic;
-            grn_o           : out std_logic;
-            blu_o           : out std_logic
+            clk_i           : in bit;
+            rst_i           : in bit;
+            data_volt_in_i  : in bit;
+            data_volt_out_o : out bit;
+            hs_o            : out bit;
+            vs_o            : out bit;
+            red_o           : out bit;
+            grn_o           : out bit;
+            blu_o           : out bit
         );
     end component;
 
     -- Señales internas para conectar al DUT
-    signal clk_tb           : std_logic := '0';
-    signal rst_tb           : std_logic := '1';
-    signal data_volt_in_tb  : std_logic := '0';
-    signal data_volt_out_tb : std_logic;
-    signal hs_tb            : std_logic;
-    signal vs_tb            : std_logic;
-    signal red_tb           : std_logic;
-    signal grn_tb           : std_logic;
-    signal blu_tb           : std_logic;
+    signal clk_tb           : bit := '0';
+    signal rst_tb           : bit := '1';
+    signal data_volt_in_tb  : bit := '0';
+    signal data_volt_out_tb : bit;
+    signal hs_tb            : bit;
+    signal vs_tb            : bit;
+    signal red_tb           : bit;
+    signal grn_tb           : bit;
+    signal blu_tb           : bit;
 
 begin
 
