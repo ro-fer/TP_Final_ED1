@@ -1,9 +1,7 @@
 -- Contador BCD
 -- Estudiante: Fernández, Rocío
 
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+
 
 entity BCD_counter is
   generic(N: natural := 4);
@@ -11,8 +9,7 @@ entity BCD_counter is
     clk_bcd  : in  bit;
     rst_bcd  : in  bit;
     ena_bcd  : in  bit;
-    q_bcd    : out bit_vector(N-1 downto 0);
-    max      : out bit
+    q_bcd    : out bit_vector(N-1 downto 0)
   );
 end entity;
 
@@ -26,7 +23,7 @@ architecture BCD_counter_arq of BCD_counter is
       q_o   : out bit
     );
   end component;
-
+  -- Salidas y entradas
   signal q_o : bit_vector(3 downto 0);
   signal d_i : bit_vector(3 downto 0);
 
@@ -69,7 +66,7 @@ begin
       q_o   => q_o(3) 
     );
 
-  -- Lógica del contador BCD (mod 10)
+  -- Lógica del contador BCD 
   d_i(0) <= not q_o(0);
   d_i(1) <= (not q_o(0) and q_o(1)) or (q_o(0) and not q_o(1) and not q_o(3));
   d_i(2) <= (not q_o(1) and q_o(2)) or (q_o(0) and q_o(1) and not q_o(2)) or (not q_o(0) and q_o(1) and q_o(2));
@@ -77,8 +74,5 @@ begin
 
   -- Asignaciones de salida
   q_bcd <= q_o;
-
-  -- Señal de máximo (cuando llega a 9 = "1001")
-  max <= '1' when q_o = "1001" else '0';
 
 end architecture;
