@@ -7,15 +7,15 @@ use IEEE.STD_LOGIC_1164.all;
 entity comp_Nb is
   generic(N: natural := 10);
   port(
-    a: in std_logic_vector(N-1 downto 0);  -- Número A
-    b: in std_logic_vector(N-1 downto 0);  -- Número B
-    s: out std_logic                       -- Salida: '1' si A = B
+    a: in  bit_vector(N-1 downto 0);  -- Nï¿½mero A
+    b: in  bit_vector(N-1 downto 0);  -- Nï¿½mero B
+    s: out bit                       -- Salida: '1' si A = B
   );
 end;
 
 architecture comp_Nb_arq of comp_Nb is
-  signal xnor_aux: std_logic_vector(N-1 downto 0);
-  signal and_aux: std_logic_vector(N-1 downto 0);
+  signal xnor_aux: bit_vector(N-1 downto 0);
+  signal and_aux:  bit_vector(N-1 downto 0);
 begin
 
   -- Compara bit a bit usando XNOR
