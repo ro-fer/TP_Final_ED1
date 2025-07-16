@@ -24,8 +24,7 @@ architecture cOnes_arq of cOnes is
           clk_bcd : in bit;
           ena_bcd : in bit;
           rst_bcd : in bit;
-          q_bcd   : out bit_vector(3 downto 0);
-          max     : out bit
+          q_bcd   : out bit_vector(3 downto 0)
       );
     end component;
 
@@ -38,7 +37,6 @@ architecture cOnes_arq of cOnes is
     signal salida_bcd6  : bit_vector(3 downto 0) := (3 downto 0 => '0');
     signal salida_bcd7  : bit_vector(3 downto 0) := (3 downto 0 => '0');
     signal salida_And   : bit_vector(5 downto 0) := (5 downto 0 => '0'); -- saida de los and para habilitar bcd q sigue
-    signal max1, max2, max3, max4, max5, max6, max7 : bit;
 
 begin
 
@@ -59,56 +57,48 @@ begin
             clk_bcd => clk_unos,
             ena_bcd => ena_unos,
             rst_bcd => reset,
-            q_bcd   => salida_bcd1,
-            max => max1
-        );
+            q_bcd   => salida_bcd1
+    );
 
     bcd2: BCD_counter
         port map (
             clk_bcd => clk_unos,
             ena_bcd => salida_And(0),
             rst_bcd => reset,
-            q_bcd   => salida_bcd2,
-            max => max2
-
-        );
+            q_bcd   => salida_bcd2
+    );
 
     bcd3: BCD_counter
         port map (
             clk_bcd => clk_unos,
             ena_bcd => salida_And(1),
             rst_bcd => reset,
-            q_bcd   => salida_bcd3,
-            max => max3
-
-        );
+            q_bcd   => salida_bcd3
+    );
 
     bcd4: BCD_counter
         port map (
             clk_bcd => clk_unos,
             ena_bcd => salida_And(2),
             rst_bcd => reset,
-            q_bcd   => salida_bcd4,
-            max => max4
-        );
+            q_bcd   => salida_bcd4
+    );
 
     bcd5: BCD_counter      
         port map (
             clk_bcd => clk_unos,
             ena_bcd => salida_And(3),
             rst_bcd => reset,
-            q_bcd   => salida_bcd5,
-            max => max5
-        );
+            q_bcd   => salida_bcd5
+    );
 
         bcd6: BCD_counter      
         port map (
             clk_bcd => clk_unos,
             ena_bcd => salida_And(4),
             rst_bcd => reset,
-            q_bcd   => salida_bcd6,
-            max => max6
-        );
+            q_bcd   => salida_bcd6
+     );
                                 -- para el reset
         bcd7: BCD_counter      
         port map (
@@ -116,7 +106,7 @@ begin
             ena_bcd => salida_And(5),
             rst_bcd => reset,
             q_bcd   => salida_bcd7
-        );
+    );
 
     q_bcd7 <= salida_bcd7; 
     q_bcd6 <= salida_bcd6;
