@@ -5,11 +5,11 @@ use IEEE.std_logic_1164.all;
 
 entity ffd is
 	port (
-		clk_i : in std_logic; -- Clock
-		rst_i : in std_logic; -- Reset
-		ena_i : in std_logic; -- Enable
-		d_i   : in std_logic; -- Dato
-		q_o   : out std_logic -- Salida
+		clk_i : in bit; -- Clock
+		rst_i : in bit; -- Reset
+		ena_i : in bit; -- Enable
+		d_i   : in bit; -- Dato
+		q_o   : out bit -- Salida
 	);
 end entity;
 
