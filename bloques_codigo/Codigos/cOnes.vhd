@@ -7,16 +7,16 @@ use work.utils.all;
 
 entity cOnes is
   port(
-    clk_unos :   in std_logic;
-    rst_unos :   in std_logic;
-    ena_unos :   in std_logic;
-    q_bcd1   :   out std_logic_vector(3 downto 0);
-    q_bcd2   :   out std_logic_vector(3 downto 0);
-    q_bcd3   :   out std_logic_vector(3 downto 0);
-    q_bcd4   :   out std_logic_vector(3 downto 0);
-    q_bcd5   :   out std_logic_vector(3 downto 0);
-    q_bcd6   :   out std_logic_vector(3 downto 0);
-    q_bcd7   :   out std_logic_vector(3 downto 0)
+    clk_unos :   in bit;
+    rst_unos :   in bit;
+    ena_unos :   in bit;
+    q_bcd1   :   out bit_vector(3 downto 0);
+    q_bcd2   :   out bit_vector(3 downto 0);
+    q_bcd3   :   out bit_vector(3 downto 0);
+    q_bcd4   :   out bit_vector(3 downto 0);
+    q_bcd5   :   out bit_vector(3 downto 0);
+    q_bcd6   :   out bit_vector(3 downto 0);
+    q_bcd7   :   out bit_vector(3 downto 0)
   );
 end;
 
@@ -24,24 +24,24 @@ architecture cOnes_arq of cOnes is
   -- BCD
   component BCD_counter is
       port(
-          clk_bcd : in std_logic;
-          ena_bcd : in std_logic;
-          rst_bcd : in std_logic;
-          q_bcd   : out std_logic_vector(3 downto 0);
-          max     : out std_logic
+          clk_bcd : in bit;
+          ena_bcd : in bit;
+          rst_bcd : in bit;
+          q_bcd   : out bit_vector(3 downto 0);
+          max     : out bit
       );
     end component;
 
-    signal reset        : std_logic;
-    signal salida_bcd1  : std_logic_vector(3 downto 0) := (3 downto 0 => '0');
-    signal salida_bcd2  : std_logic_vector(3 downto 0) := (3 downto 0 => '0');
-    signal salida_bcd3  : std_logic_vector(3 downto 0) := (3 downto 0 => '0');
-    signal salida_bcd4  : std_logic_vector(3 downto 0) := (3 downto 0 => '0');
-    signal salida_bcd5  : std_logic_vector(3 downto 0) := (3 downto 0 => '0');
-    signal salida_bcd6  : std_logic_vector(3 downto 0) := (3 downto 0 => '0');
-    signal salida_bcd7  : std_logic_vector(3 downto 0) := (3 downto 0 => '0');
-    signal salida_And   : std_logic_vector(5 downto 0) := (5 downto 0 => '0'); -- saida de los and para habilitar bcd q sigue
-    signal max1, max2, max3, max4, max5, max6, max7 : std_logic;
+    signal reset        : bit;
+    signal salida_bcd1  : bit_vector(3 downto 0) := (3 downto 0 => '0');
+    signal salida_bcd2  : bit_vector(3 downto 0) := (3 downto 0 => '0');
+    signal salida_bcd3  : bit_vector(3 downto 0) := (3 downto 0 => '0');
+    signal salida_bcd4  : bit_vector(3 downto 0) := (3 downto 0 => '0');
+    signal salida_bcd5  : bit_vector(3 downto 0) := (3 downto 0 => '0');
+    signal salida_bcd6  : bit_vector(3 downto 0) := (3 downto 0 => '0');
+    signal salida_bcd7  : bit_vector(3 downto 0) := (3 downto 0 => '0');
+    signal salida_And   : bit_vector(5 downto 0) := (5 downto 0 => '0'); -- saida de los and para habilitar bcd q sigue
+    signal max1, max2, max3, max4, max5, max6, max7 : bit;
 
 begin
 
