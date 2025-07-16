@@ -1,4 +1,4 @@
-
+-- sincronismo horizontal 
 entity hsync is 
     port (
         ena_hsync   : in bit;
@@ -14,7 +14,7 @@ end;
 
 architecture hsync_arq of hsync is 
 
-    -- contador binario, necesito que cuente hasta 800 por ende que sea de 10 bits
+    -- contador binario, necesito que cuente hasta 800 --> 10 bits
     component cont_bin_gen is 
         generic(
             N: natural := 10 
@@ -27,11 +27,11 @@ architecture hsync_arq of hsync is
         );
     end component;
 
-    component  comparador is
+    component  comp_Nb is
         port ( 
-            A       : in bit_vector(9 downto 0);
-            B       : in bit_vector(9 downto 0);
-            salida  : out bit
+            a       : in bit_vector(9 downto 0);
+            b       : in bit_vector(9 downto 0);
+            s  : out bit
         );
     end component;
 
@@ -69,30 +69,30 @@ begin
 
     comp639: comparador 
         port map(
-            A       => cuenta,
-            B       => "1001111111",
-            salida  =>  comp_639
+            a       => cuenta,
+            b       => "1001111111",
+            s  =>  comp_639
         );
 
     comp655: comparador 
         port map(
-            A       => cuenta,
-            B       => "1010001111",
-            salida  =>  comp_655
+            a       => cuenta,
+            b       => "1010001111",
+            s  =>  comp_655
         );
         
     comp751: comparador 
         port map(
-            A       => cuenta,
-            B       => "1011101111",
-            salida  => comp_751
+            a       => cuenta,
+            b       => "1011101111",
+            s  => comp_751
         );
         
     comp799: comparador 
         port map(
-            A       => cuenta,
-            B       => "1100011111",
-            salida  => comp_799
+            a       => cuenta,
+            b       => "1100011111",
+            s  => comp_799
         );
     
     -- necesito 2 ffd para negar las salidas y asi generar los pulsos 
