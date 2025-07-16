@@ -1,5 +1,5 @@
 library IEEE;
-use IEEE.std_logic_1164.all;
+use IEEE.bit_1164.all;
 
 entity ADC_SD_tb is
 end;
@@ -9,22 +9,22 @@ architecture sim of ADC_SD_tb is
     -- Componente a testear
     component ADC_SD is
         port(
-            clk_i   : in std_logic;
-            rst_i   : in std_logic;
-            ena_i   : in std_logic;
-            D_vi    : in std_logic;
-            Q_fb    : out std_logic;
-            Q_proc  : out std_logic
+            clk_i   : in bit;
+            rst_i   : in bit;
+            ena_i   : in bit;
+            D_vi    : in bit;
+            Q_fb    : out bit;
+            Q_proc  : out bit
         );
     end component;
 
     -- Señales internas para el banco de pruebas
-    signal clk_i_tb   : std_logic := '0';
-    signal rst_i_tb   : std_logic := '1';
-    signal ena_i_tb   : std_logic := '0';
-    signal D_vi_tb    : std_logic := '0';
-    signal Q_fb_tb    : std_logic;
-    signal Q_proc_tb  : std_logic;
+    signal clk_i_tb   : bit := '0';
+    signal rst_i_tb   : bit := '1';
+    signal ena_i_tb   : bit := '0';
+    signal D_vi_tb    : bit := '0';
+    signal Q_fb_tb    : bit;
+    signal Q_proc_tb  : bit;
 
 begin
 
