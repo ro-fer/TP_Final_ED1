@@ -6,7 +6,7 @@ end;
 
 architecture cont_unos_tb_arq of cont_unos_tb is
 
-    component cont_unos is 
+    component cOnes is 
         port (
             clk_unos:   in bit;
             rst_unos:   in bit;
@@ -38,9 +38,9 @@ architecture cont_unos_tb_arq of cont_unos_tb is
         ena_unos_tb <= '1' after 10 ns;
         clk_unos_tb <= not clk_unos_tb after 5 ns;
         
-        rst_unos_tb <= '1' after 20 ns, '0' after 50 ns;
+        rst_unos_tb <= '1' after 60 ns, '0' after 70 ns; -- chequeo de reset por sistemaa
 
-        DUT: cont_unos
+        DUT: cOnes
             port map (
                 clk_unos    => clk_unos_tb,
                 rst_unos    => rst_unos_tb,
