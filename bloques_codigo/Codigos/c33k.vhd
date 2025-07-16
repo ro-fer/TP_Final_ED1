@@ -1,14 +1,13 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+-- Contador binario
+-- cuenta hasta 33K
 
 entity c33k is
   port (
     clk_33k   : in bit;
     rst_33k   : in bit;
     ena_33k   : in bit;
-    out_1   : out  bit;  -- se va a habilitar el registro
-    out_2   : out  bit;   -- se va a resetear el contador de unos 
+    out_1   : out  bit;  --  habilitar el registro
+    out_2   : out  bit;   --  resetear el contador de unos 
     cuenta  : out  bit_vector(21 downto 0)
   );
 end entity;
@@ -45,10 +44,10 @@ begin
           clk_i => clk_33k,
           rst_i => '0',
           ena_i => ena_33k,
-          d_i   => salida_reg, -- le ingresa la salida del reg, y retarda 1 ciclo de reloj para el contador de unos
+          d_i   => salida_reg,
           q_o   => salida_cont
       );
-  -- resetea por sistema o por fin de cuenta
+  -- reseteo por sistema o por fin de cuenta
   rst_cont<= rst_33k or salida_reg;
   out_1   <= salida_reg;
   out_2   <= salida_cont;
