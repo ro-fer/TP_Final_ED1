@@ -5,11 +5,11 @@
 
 entity sum_1b is
   port(
-    a_i: in  bit_logic; -- Entrada A
-    b_i: in  bit_logic; -- Entrada B
-    c_i: in  bit_logic; -- Entrada Carry
-    s_o: out bit_logic; -- Suma de A+B
-    c_o: out bit_logic -- Salida Carry
+    a_i: in  bit; -- Entrada A
+    b_i: in  bit; -- Entrada B
+    c_i: in  bit; -- Entrada Carry
+    s_o: out bit; -- Suma de A+B
+    c_o: out bit -- Salida Carry
   );
 end;
 

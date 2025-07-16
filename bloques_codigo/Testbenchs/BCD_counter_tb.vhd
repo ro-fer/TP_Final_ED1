@@ -5,7 +5,7 @@ end;
 
 architecture contador_bcd_tb_arq of contador_bcd_tb is 
 
-    component contador_bcd is 
+    component BCD_counter is 
 
         port(
             clk_bcd : in bit;
@@ -26,7 +26,7 @@ begin
     rst_bcd_tb <= '1' after 30 ns, '0' after 50 ns, '1' after 450 ns;
     clk_bcd_tb <= not clk_bcd_tb after 5 ns;
 
-    DUT: contador_bcd 
+    DUT: BCD_counter 
         port map(
             clk_bcd => clk_bcd_tb,
             rst_bcd => rst_bcd_tb,
