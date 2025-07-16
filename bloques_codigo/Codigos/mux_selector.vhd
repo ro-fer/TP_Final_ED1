@@ -1,3 +1,7 @@
+-- LOGICA (MUX) 
+-- entrada --> utlimas 3 posiciones del contH (elije posicion del monitor)
+-- selector --> utlimas 3 posiciones del cont v (elije franja del monitor)
+
 entity mux_selector is 
     port(
         A_selector   : in bit_vector(2 downto 0);
