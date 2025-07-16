@@ -4,11 +4,12 @@ use IEEE.numeric_std.all;
 
 entity c33k is
   port (
-    clk_i   : in std_logic;
-    rst_i   : in std_logic;
-    ena_i   : in std_logic;
-    Q_BCD   : out std_logic;
-    cuenta  : out std_logic_vector(21 downto 0)
+    clk_33k   : in bit;
+    rst_33k   : in bit;
+    ena_33k   : in bit;
+    out_1   : out  bit;  -- se va a habilitar el registro
+    out_2   : out  bit;   -- se va a resetear el contador de unos 
+    cuenta  : out  bit_vector(21 downto 0)
   );
 end entity;
 
@@ -16,37 +17,41 @@ architecture c33k_arq of c33k is
 
   component cont_bin_gen is
     port (
-      clk_bin_gen : in std_logic;
-      ena_bin_gen : in std_logic;
-      rst_bin_gen : in std_logic;
-      salida_gen  : out std_logic_vector(21 downto 0)
+      clk_bin_gen : in  bit;
+      ena_bin_gen : in  bit;
+      rst_bin_gen : in  bit;
+      salida_gen  : out bit_vector(21 downto 0)
     );
   end component;
 
-  signal salida_cont : std_logic_vector(21 downto 0);
-  signal salida_reg  : std_logic;
-  signal salida_q    : std_logic;
+  signal salida_cont : bit_vector(21 downto 0);
+  signal salida_reg  : bit;
+  signal salida_q    : bit;
 
 begin
 
-  contador: cont_bin_gen
-    port map(
-      clk_bin_gen => clk_i,
-      ena_bin_gen => ena_i,
-      rst_bin_gen => rst_i or salida_reg,
-      salida_gen  => salida_cont
-    );
+  salida_reg <= (salida(21) and salida(20) and not salida(19) and not salida (18) and salida(17) and not salida(16) and not salida(15) and salida(14) and not salida(13) and salida(12)  and salida(11) and not salida(10) and salida(9) and not salida(8) and salida(7) and not salida(6) and not salida(5) and salida(4) and salida(3) and salida(2) and salida(1) and salida(0));
 
-  salida_reg <= (
-    salida_cont(21) and salida_cont(20) and not salida_cont(19) and not salida_cont(18) and
-    salida_cont(17) and not salida_cont(16) and not salida_cont(15) and salida_cont(14) and
-    not salida_cont(13) and salida_cont(12) and salida_cont(11) and not salida_cont(10) and
-    salida_cont(9) and not salida_cont(8) and salida_cont(7) and not salida_cont(6) and
-    not salida_cont(5) and salida_cont(4) and salida_cont(3) and salida_cont(2) and
-    salida_cont(1) and salida_cont(0)
-  );
+  cont33k: cont_bin_gen
+      port map(
+          clk_bin_gen => clk_33k,
+          ena_bin_gen => ena_33k,
+          rst_bin_gen => rst_cont,
+          salida_gen  => salida
+      );
 
-  Q_BCD  <= salida_reg;
-  cuenta <= salida_cont;
+  FFD_salida: ffd
+      port map(
+          clk_i => clk_33k,
+          rst_i => '0',
+          ena_i => ena_33k,
+          d_i   => salida_reg, -- le ingresa la salida del reg, y retarda 1 ciclo de reloj para el contador de unos
+          q_o   => salida_cont
+      );
+  -- resetea por sistema o por fin de cuenta
+  rst_cont<= rst_33k or salida_reg;
+  out_1   <= salida_reg;
+  out_2   <= salida_cont;
+  cuenta  <= salida;
 
 end architecture;
