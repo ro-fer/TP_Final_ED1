@@ -1,9 +1,6 @@
 -- Contador de Unos 
 -- Estudiante: Fernández, Rocío
 
-library IEEE;
-use IEEE.std_logic_1164.all;
-use work.utils.all;
 
 entity cOnes is
   port(
