@@ -1,14 +1,12 @@
 -- Comparador de N bits
 -- Estudiante: Fernandez, Rocio
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.all;
 
 entity comp_Nb is
   generic(N: natural := 10);
   port(
-    a: in  bit_vector(N-1 downto 0);  -- N�mero A
-    b: in  bit_vector(N-1 downto 0);  -- N�mero B
+    a: in  bit_vector(N-1 downto 0);  --  A
+    b: in  bit_vector(N-1 downto 0);  -- B
     s: out bit                       -- Salida: '1' si A = B
   );
 end;
