@@ -28,7 +28,7 @@ architecture cont_bin_gen_tb_arq of cont_bin_gen_tb is
 begin
     ena_tb <= '1' after 10 ns;
     clk_tb <= not clk_tb after 5 ns;
-    --rst_tb <= '1' after 80 ns, '0' after 110 ns;
+    -- rst_tb <= '1' after 80 ns, '0' after 110 ns; -- rest de sistema
 
     DUT: cont_bin_gen
         generic map(

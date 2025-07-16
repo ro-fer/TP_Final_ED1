@@ -68,28 +68,28 @@ begin
 
     -- comparadores 
 
-    comp639: comparador 
+    comp639: comp_Nb 
         port map(
             a       => cuenta,
             b       => "1001111111",
             s  =>  comp_639
         );
 
-    comp655: comparador 
+    comp655: comp_Nb 
         port map(
             a       => cuenta,
             b       => "1010001111",
             s  =>  comp_655
         );
         
-    comp751: comparador 
+    comp751: comp_Nb 
         port map(
             a       => cuenta,
             b       => "1011101111",
             s  => comp_751
         );
         
-    comp799: comparador 
+    comp799: comp_Nb 
         port map(
             a       => cuenta,
             b       => "1100011111",

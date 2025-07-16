@@ -3,30 +3,45 @@
 
 
 entity c33k is
-  port (
-    clk_33k   : in bit;
-    rst_33k   : in bit;
-    ena_33k   : in bit;
-    out_1   : out  bit;  --  habilitar el registro
-    out_2   : out  bit;   --  resetear el contador de unos 
-    cuenta  : out  bit_vector(21 downto 0)
-  );
-end entity;
+    port (
+        clk_33k : in bit;
+        rst_33k : in bit;   
+        ena_33k : in bit;   
+        out_1   : out bit;  -- se va a habilitar el registro
+        out_2   : out bit;   -- se va a resetear el contador de unos 
+        -- cuenta  : out bit_vector(15 downto 0)
+        cuenta  : out bit_vector(21 downto 0)
+
+    );
+end;
 
 architecture c33k_arq of c33k is
 
   component cont_bin_gen is
+    generic(
+        N: natural := 22
+    );
     port (
-      clk_bin_gen : in  bit;
-      ena_bin_gen : in  bit;
-      rst_bin_gen : in  bit;
-      salida_gen  : out bit_vector(21 downto 0)
+      clk_bin_gen : in bit;
+      ena_bin_gen : in bit;
+      rst_bin_gen : in bit;
+      salida_gen  : out bit_vector(N-1 downto 0)
     );
   end component;
-
-  signal salida_cont : bit_vector(21 downto 0);
+    component ffd is
+    port (
+      clk_i   : in  bit;
+      rst_i   : in  bit;
+      ena_i   : in  bit;
+      d_i     : in  bit;
+      q_o     : out bit
+    );
+  end component;
+  signal salida       : bit_vector(21 downto 0);
+  signal salida_cont  : bit; 
   signal salida_reg  : bit;
   signal salida_q    : bit;
+  signal rst_cont     : bit := '0';               -- para el rst, cuando llega a 32999 o hay rst de sistema
 
 begin
 

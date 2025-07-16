@@ -26,11 +26,11 @@ architecture vsync_arq of vsync is
     );
     end component;
 
-    component  comparador is
+    component  comp_Nb is
         port ( 
             A       : in bit_vector(9 downto 0);
             B       : in bit_vector(9 downto 0);
-            salida  : out bit
+            s  : out bit
         );
     end component;
 
@@ -66,33 +66,32 @@ begin
             salida_gen  => cuenta_v
         );
 
-    comp479: comparador
+    comp479: comp_Nb
         port map(
             A       => cuenta_v,
             B       => "0111011110", -- lo cambio a 478 
-            salida  => comp_479
+            s  => comp_479
         );
 
-    comp489: comparador
+    comp489: comp_Nb
         port map(
             A       => cuenta_v,
             B       => "0111101001",
-            salida  => comp_489
+            s  => comp_489
         );
 
-    comp491: comparador
+    comp491: comp_Nb
         port map(
             A       => cuenta_v,
             B       => "0111101011",
-            salida  => comp_491
+            s  => comp_491
         );
 
-    comp524: comparador
+    comp524: comp_Nb
         port map(
             A       => cuenta_v,
             B       => "1000001010", 
-
-            salida  => comp_524
+            s  => comp_524
         );
 
     ffdvsync: ffd
