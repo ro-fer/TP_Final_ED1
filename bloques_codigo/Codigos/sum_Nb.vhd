@@ -6,16 +6,16 @@ use IEEE.std_logic_1164.all;
 
 entity sum_Nb_4bit is
   port(
-    a_i : in std_logic_vector(3 downto 0);  -- Entrada A
-    b_i : in std_logic_vector(3 downto 0);  -- Entrada B
-    c_i : in std_logic;                     -- Carry de entrada
-    s_o : out std_logic_vector(3 downto 0); -- Suma
-    c_o : out std_logic                     -- Carry de salida
+    a_i : in  bit_vector(3 downto 0);  -- Entrada A
+    b_i : in  bit_vector(3 downto 0);  -- Entrada B
+    c_i : in  bit;                     -- Carry de entrada
+    s_o : out bit_vector(3 downto 0); -- Suma
+    c_o : out bit                     -- Carry de salida
   );
 end entity;
 
 architecture rtl of sum_Nb_4bit is
-  signal c_aux : std_logic_vector(4 downto 0);
+  signal c_aux : bit_vector(4 downto 0);
 begin
 
   c_aux(0) <= c_i;
