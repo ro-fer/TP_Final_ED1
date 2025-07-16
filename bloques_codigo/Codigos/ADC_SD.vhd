@@ -1,8 +1,7 @@
 -- Conversor Analógico Digital Sigma-Delta
 -- Estudiante: Fernandez, Rocio
 
-library IEEE;
-use IEEE.std_logic_1164.all;
+
 
 entity ADC_SD is
   port(
