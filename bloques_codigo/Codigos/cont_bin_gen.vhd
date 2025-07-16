@@ -4,10 +4,10 @@ use IEEE.std_logic_1164.all;
 
 entity cont_bin_gen is
   port (
-    clk_bin_gen : in std_logic;
-    ena_bin_gen : in std_logic;
-    rst_bin_gen : in std_logic;
-    salida_gen  : out std_logic_vector(21 downto 0)
+    clk_bin_gen : in bit;
+    ena_bin_gen : in bit;
+    rst_bin_gen : in bit;
+    salida_gen  : out bit_vector(21 downto 0)
   );
 end entity;
 
@@ -15,17 +15,17 @@ architecture cont_bin_gen_arq of cont_bin_gen is
 
   component ffd is
     port (
-      clk_i   : in  std_logic;
-      rst_i   : in  std_logic;
-      ena_i   : in  std_logic;
-      d_i     : in  std_logic;
-      q_o     : out std_logic
+      clk_i   : in  bit;
+      rst_i   : in  bit;
+      ena_i   : in  bit;
+      d_i     : in  bit;
+      q_o     : out bit
     );
   end component;
 
-  signal salida : std_logic_vector(21 downto 0);
-  signal ands   : std_logic_vector(21 downto 0);
-  signal xors   : std_logic_vector(21 downto 0);
+  signal salida : bit_vector(21 downto 0);
+  signal ands   : bit_vector(21 downto 0);
+  signal xors   : bit_vector(21 downto 0);
 
 begin
 
