@@ -2,6 +2,7 @@
 
 library IEEE;
 use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
 
 entity c33k_tb is
 end;

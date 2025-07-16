@@ -1,6 +1,10 @@
 -- Contador binario
 -- cuenta hasta 33K
 
+library IEEE;
+use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
+
 entity c33k is
   port (
     clk_33k   : in bit;

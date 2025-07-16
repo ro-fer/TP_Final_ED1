@@ -1,7 +1,7 @@
 -- Test de Sumador de N bit
-
 library IEEE;
 use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
 
 entity sum_Nb_tb is
 end sum_Nb_tb;

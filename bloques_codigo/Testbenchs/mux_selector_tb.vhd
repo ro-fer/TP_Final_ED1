@@ -1,5 +1,7 @@
 -- Test selector mux (LOGICA)
-
+library IEEE;
+use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
 
 entity mux_selector_tb is 
 end;

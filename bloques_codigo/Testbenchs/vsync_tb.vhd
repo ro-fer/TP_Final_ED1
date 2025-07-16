@@ -1,5 +1,9 @@
 -- Test del sincronismo vertica
 
+library IEEE;
+use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
+
 entity vsync_tb is 
 end;
 

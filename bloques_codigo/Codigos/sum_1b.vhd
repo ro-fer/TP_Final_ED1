@@ -2,7 +2,9 @@
 
 -- Estudiante: Fernandez, Rocio
 
-
+library IEEE;
+use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
 
 entity sum_1b is
   port(

@@ -1,7 +1,9 @@
 -- Contador BCD
 -- Estudiante: Fernández, Rocío
 
-
+library IEEE;
+use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
 
 entity BCD_counter is
   generic(N: natural := 4);

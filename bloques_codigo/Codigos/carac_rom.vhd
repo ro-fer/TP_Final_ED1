@@ -1,6 +1,8 @@
 --ROM de caracteres
 -- Estudiante: Fernández, Rocío
-
+library IEEE;
+use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
 
 entity rom is 
     port(

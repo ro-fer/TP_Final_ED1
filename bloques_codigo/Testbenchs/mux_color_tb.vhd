@@ -1,5 +1,9 @@
 -- Test MUX color
 
+library IEEE;
+use IEEE.bit_1164.all;
+use IEEE.numeric_std.all;
+
 entity mux_color_tb is 
 end;
 
