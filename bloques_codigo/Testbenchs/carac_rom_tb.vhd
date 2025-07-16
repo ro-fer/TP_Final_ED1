@@ -1,72 +1,39 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-
-entity carac_rom_tb is
+-- TB ROM
+entity rom_tb is 
 end;
 
-architecture test of carac_rom_tb is
+architecture rom_tb_arq of rom_tb is 
 
-    -- Declaración del componente
-    component rom
-        generic (
-            A : integer := 4;
-            F : integer := 3;
-            C : integer := 3
-        );
-        port (
-            char_address : in std_logic_vector (A-1 downto 0);
-            sub_fila     : in std_logic_vector (F-1 downto 0);
-            sub_col      : in std_logic_vector (C-1 downto 0);
-            rom_data     : out std_logic
-        );
+    component rom is 
+        port(
+            char_address : bit_vector(3 downto 0); 
+            font_col     : bit_vector(2 downto 0); 
+            font_row     : bit_vector(2 downto 0);
+            rom_out      : out bit
+        ); 
     end component;
 
-    -- Señales del testbench
-    signal char_address_tb : std_logic_vector(3 downto 0);
-    signal sub_fila_tb     : std_logic_vector(2 downto 0);
-    signal sub_col_tb      : std_logic_vector(2 downto 0);
-    signal rom_data_tb     : std_logic;
+    signal char_address_tb  : bit_vector(3 downto 0) := "0000";
+    signal font_col_tb      : bit_vector(2 downto 0) := "000";
+    signal font_row_tb      : bit_vector(2 downto 0) := "000";
+    signal rom_out_tb       : bit := '0';
 
 begin
 
-    -- Instancia del DUT
+    font_col_tb <=  "000" after 10 ns, --columna 0 (todos ceros)
+			        "001" after 100 ns; --columna 1 (varia el valor)
+
+	font_row_tb <= "000" after 10 ns, "001" after 20 ns, "010" after 30 ns, "011" after 40 ns, "100" after 50 ns, "101" after 60 ns, "110" after 70 ns, "111" after 80 ns, --deberian salir todos ceros porque estoy en columna 0
+			  "000" after 110 ns, "001" after 120 ns, "010" after 130 ns, "011" after 140 ns, "100" after 150 ns, "101" after 160 ns, "110" after 170 ns, "111" after 180 ns; --varia el valor porque paso a la columna 1
+
+	char_address_tb <= "0000" after 10 ns, "0001" after 20 ns, "0010" after 30 ns, "0011" after 40 ns, "0100" after 50 ns, "0101" after 60 ns, "0110" after 70 ns, "0111" after 80 ns, "1000" after 90 ns, "1001" after 100 ns, --deberian salir todos ceros porque estoy en columna 0
+				  "0000" after 110 ns, "0001" after 120 ns, "0010" after 130 ns, "0011" after 140 ns, "0100" after 150 ns, "0101" after 160 ns, "0110" after 170 ns, "0111" after 180 ns, "1000" after 190 ns, "1001" after 200 ns; --varia el valor porque paso a la columna 1
+
     DUT: rom
-        port map (
+        port map(
             char_address => char_address_tb,
-            sub_fila     => sub_fila_tb,
-            sub_col      => sub_col_tb,
-            rom_data     => rom_data_tb
+            font_col     => font_col_tb,
+            font_row     => font_row_tb,
+            rom_out      => rom_out_tb
         );
-
-    -- Proceso de estímulos
-    stim_proc : process
-    begin
-        -- Caracter '0' → address = 0
-        char_address_tb <= "0000";
-
-        for fila in 0 to 7 loop
-            sub_fila_tb <= std_logic_vector(to_unsigned(fila, 3));
-
-            for col in 0 to 7 loop
-                sub_col_tb <= std_logic_vector(to_unsigned(col, 3));
-                wait for 10 ns;
-            end loop;
-        end loop;
-
-        -- Probar el punto '.' → address = 10
-        char_address_tb <= "1010";
-
-        for fila in 0 to 7 loop
-            sub_fila_tb <= std_logic_vector(to_unsigned(fila, 3));
-
-            for col in 0 to 7 loop
-                sub_col_tb <= std_logic_vector(to_unsigned(col, 3));
-                wait for 10 ns;
-            end loop;
-        end loop;
-
-        wait;
-    end process;
-
-end architecture;
+end;
