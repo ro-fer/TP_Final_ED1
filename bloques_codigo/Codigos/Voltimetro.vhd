@@ -1,7 +1,6 @@
 -- Voltímetro VGA Intermedio
 -- Estudiante: Fernández, Rocío
 
-library IEEE;
 
 entity Voltimetro is
   port (
@@ -17,109 +16,115 @@ entity Voltimetro is
   );
 end entity;
 
-architecture rtl of Voltimetro is
+architecture volti_arq of volti is 
 
-  component ffd is
-	port (
-		clk_i : in bit; -- Clock
-		rst_i : in bit; -- Reset
-		ena_i : in bit; -- Enable
-		d_i   : in bit; -- Dato
-		q_o   : out bit -- Salida
-	);
-  end component;
-  component cont_bin_gen is
-    port (
-      clk_bin_gen : in bit;
-      ena_bin_gen : in bit;
-      rst_bin_gen : in bit;
-      salida_gen  : out bit_vector(21 downto 0)
-    );
-  end component;
-  component c33k is
-  port (
-    clk_33k   : in bit;
-    rst_33k   : in bit;
-    ena_33k   : in bit;
-    out_1   : out bit;  -- se va a habilitar el registro
-    out_2   : out bit;   -- se va a resetear el contador de unos 
-    cuenta  : out bit_vector(21 downto 0)
-  );
-  end component;
-component cOnes is
-  port(
-    clk_unos :   in bit;
-    rst_unos :   in bit;
-    ena_unos :   in bit;
-    q_bcd1   :   out bit_vector(3 downto 0);
-    q_bcd2   :   out bit_vector(3 downto 0);
-    q_bcd3   :   out bit_vector(3 downto 0);
-    q_bcd4   :   out bit_vector(3 downto 0);
-    q_bcd5   :   out bit_vector(3 downto 0);
-    q_bcd6   :   out bit_vector(3 downto 0);
-    q_bcd7   :   out bit_vector(3 downto 0)
-  );
-  end component;
-  component reg_Nb is
-  port (
-    clk_reg : in bit; -- Clock
-    rst_reg : in bit; -- Reset
-    ena_reg : in bit; -- Enable
-
-    -- Entradas
-    d1_reg : in bit_vector(3 downto 0);
-    d2_reg : in bit_vector(3 downto 0);
-    d3_reg : in bit_vector(3 downto 0);
-
-    -- Salidas
-    q1_reg : out bit_vector(3 downto 0);
-    q2_reg : out bit_vector(3 downto 0);
-    q3_reg : out bit_vector(3 downto 0)
-  );
-  end component;
-component mux is
-  port (
-    bcd1    : in  bit_vector(3 downto 0);
-    punto   : in  bit_vector(3 downto 0); -- '.'
-    bcd2    : in  bit_vector(3 downto 0);
-    bcd3    : in  bit_vector(3 downto 0);
-    voltaje : in  bit_vector(3 downto 0); -- 'V'
-    espacio : in  bit_vector(3 downto 0); -- ' ' 
-    selector: in  bit_vector(2 downto 0); -- selecciona una de las 6 entradas
-    salida  : out bit_vector(3 downto 0)  -- se va a la ROM   
-  );
-  end component; 
-component vga_controller is
-  port(
-    clk_vga     : in  bit; -- Clock
-    rst_vga     : in  bit; -- Reset
-    ena_vga      : in bit;
-    r_i_vga      : in bit;
-    g_i_vga      : in bit; 
-    b_i_vga      : in bit; 
-    -- salidas
-    hsync_vga   : out bit;                  
-    vsync_vga   : out bit;                
-    vidon_vga  : out bit;  -- '1' si estamos en la zona visible
-    vvidon_vga   : out bit;
-    r_o_vga      : out bit;
-    g_o_vga      : out bit;
-    b_o_vga      : out bit;
-    selector_vga : out bit_vector(2 downto 0);
-    pix_x_o   : out bit_vector(9 downto 0); -- Coordenada X del píxel (0 a 639)
-    pix_y_o   : out bit_vector(9 downto 0)  -- Coordenada Y del píxel (0 a 479)
-  );
-  end component;
-  component rom is 
-      port(
-          char_address : bit_vector(3 downto 0); 
-          font_col     : bit_vector(2 downto 0); 
-          font_row     : bit_vector(2 downto 0);
-          rom_out      : out bit
-      ); 
+    component ffd is 
+        port (
+            clk_i   : in bit;
+            rst_i   : in bit;
+            ena_i   : in bit;
+            d_i     : in bit;
+            q_o     : out bit
+        );
     end component;
-  
-  signal clk_2b               : bit_vector(1 downto 0) := "00";   -- clk del contador de 2 bits de entradas
+
+    component cont_bin_gen is   -- para el clk de 25 MHz
+        generic(
+            N: natural := 2 
+        );
+    
+        port (
+            clk_bin_gen : in bit;
+            ena_bin_gen : in bit;
+            rst_bin_gen : in bit;
+            salida_gen  : out bit_vector(N-1 downto 0)
+        );
+    end component;
+
+    component cont_33k is 
+        port (
+            clk_33k : in bit;
+            rst_33k : in bit;   
+            ena_33k : in bit;   
+            out_1   : out bit;  -- se va a habilitar el registro
+            out_2   : out bit;   -- se va a resetear el contador de unos 
+            cuenta  : out bit_vector(21 downto 0)
+        );
+    end component;
+
+    component cont_unos is 
+        port (
+            clk_unos:   in bit;
+            rst_unos:   in bit;
+            ena_unos:   in bit;
+            q_bcd1:     out bit_vector(3 downto 0);
+            q_bcd2:     out bit_vector(3 downto 0);
+            q_bcd3:     out bit_vector(3 downto 0);
+            q_bcd4:     out bit_vector(3 downto 0);
+            q_bcd5:     out bit_vector(3 downto 0);
+            q_bcd6:     out bit_vector(3 downto 0);
+            q_bcd7:     out bit_vector(3 downto 0)
+        );
+    end component;
+
+    component reg is 
+        port (
+            clk_reg : in bit;
+            rst_reg : in bit;
+            ena_reg : in bit;
+            d1_reg  : in bit_vector(3 downto 0);
+            d2_reg  : in bit_vector(3 downto 0);
+            d3_reg  : in bit_vector(3 downto 0);
+            q1_reg  : out bit_vector(3 downto 0);
+            q2_reg  : out bit_vector(3 downto 0);
+            q3_reg  : out bit_vector(3 downto 0)
+        );
+    end component;
+
+    component mux is
+        port(
+            bcd1    : in bit_vector(3 downto 0);
+            punto   : in bit_vector(3 downto 0); -- '.'
+            bcd2    : in bit_vector(3 downto 0);
+            bcd3    : in bit_vector(3 downto 0);
+            voltaje : in bit_vector(3 downto 0); -- 'V'
+            espacio : in bit_vector(3 downto 0); -- ' ' 
+            selector: in bit_vector(2 downto 0); -- selecciona una de las 6 entradas
+            salida  : out bit_vector(3 downto 0)  -- se va a la ROM
+        );
+    end component;
+
+    component rom is 
+        port(
+            char_address : bit_vector(3 downto 0); 
+            font_col     : bit_vector(2 downto 0); 
+            font_row     : bit_vector(2 downto 0);
+            rom_out      : out bit
+        ); 
+    end component;
+
+    component vga is 
+        port( 
+            ena_vga      : in bit;
+            rst_vga      : in bit;
+            clk_vga      : in bit;
+            r_i_vga      : in bit;
+            g_i_vga      : in bit; 
+            b_i_vga      : in bit; 
+            hsync_vga    : out bit;
+            vsync_vga    : out bit;
+            vidon_vga    : out bit;
+            vvidon_vga   : out bit;
+            r_o_vga      : out bit;
+            g_o_vga      : out bit;
+            b_o_vga      : out bit;
+            selector_vga : out bit_vector(2 downto 0);
+            pixelx_vga   : out bit_vector(2 downto 0);
+            pixely_vga   : out bit_vector(2 downto 0)
+        );
+    end component;
+
+    signal clk_2b               : bit_vector(1 downto 0) := "00";   -- clk del contador de 2 bits de entradas
     
     signal clk                  : bit := '0';                       -- clk general  
     signal sal_ffd_entrada      : bit := '0';                       -- salida del ffd de entrada 
@@ -146,7 +151,7 @@ component vga_controller is
     signal pixely               : bit_vector(2 downto 0) := "000";  -- sale de vga a font_row de la rom
 
     --entrada al registro
-	  signal ena_reg_s : bit := '0';	--habilito cuando el contador 330 llega a 0 AND vidon = '1'
+	signal ena_reg_s : bit := '0';	--habilito cuando el contador 330 llega a 0 AND vidon = '1'
 
     ---- SEÑALES QUE MUEREN
     signal salida_cuenta        : bit_vector(21 downto 0) := (21 downto 0 => '0');  -- salida de la cuenta del cont_33k
@@ -155,9 +160,12 @@ component vga_controller is
     signal sal_bcd_3            : bit_vector(3 downto 0) := "0000";
     signal sal_bcd_4            : bit_vector(3 downto 0) := "0000";
 
+
+
 begin
 
-  FFD_ENTRADA: ffd
+
+    FFD_ENTRADA: ffd
         port map(
             clk_i   => clk,
             rst_i   => rst_volti,
@@ -174,7 +182,7 @@ begin
             salida_gen  => clk_2b
         );
 
-    CONT_BINARIO: c33k  
+    CONT_BINARIO: cont_33k  
         port map(
             clk_33k => clk,
             rst_33k => rst_volti,  
@@ -184,7 +192,7 @@ begin
             cuenta  => salida_cuenta            -- no va a ningun lado
         );
 
-    CONT_1S: cOnes
+    CONT_1S: cont_unos 
         port map(
             clk_unos    => clk,
             rst_unos    => cont_a_cont_unos,    -- le llega una de las salidas del contador binario
@@ -198,7 +206,7 @@ begin
             q_bcd7      => sal_bcd_7            -- se va al reg 3
         );
 
-    REGISTRO: reg_Nb  
+    REGISTRO: reg  
         port map(
             clk_reg => clk,
             rst_reg => rst_volti,
@@ -231,14 +239,13 @@ begin
             rom_out      => sal_rom             -- saca el dato
         );
 
-    VGA_vga: vga_controller
+    VGA_vga: vga
     port map( 
         ena_vga      => '1',              
         rst_vga      => rst_volti,
         clk_vga      => clk,
         r_i_vga      => sal_rom,                -- viene de la rom, cuando es '1' todos los colores en 1 hacen blanco
-        g_i_vga      => sal_rom,                -- viene de la rom, cuando es '1' todos los colores en 1 hacen blanco 
-        b_i_vga      => '1',                    -- siempre es 1, hace que el fondo sea azul
+        g_i_vga      => sal_rom,                -- viene de la rom, cuando es '1' todos los colores en 1 hacen blanco b_i_vga      => '1',                    -- siempre es 1, hace que el fondo sea azul
         hsync_vga    => hs_o,                   -- sale el sincronismo horizontal
         vsync_vga    => vs_o,                   -- sale el sincronismo vertical
         vidon_vga    => sal_vidon,
@@ -255,4 +262,4 @@ begin
     clk         <= clk_2b(1);                   -- cuarto del reloj
     voltaje_s   <= not sal_ffd_entrada;         -- retroalimentacion
 
-end architecture;
+end;
