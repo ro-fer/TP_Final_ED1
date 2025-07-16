@@ -1,71 +1,53 @@
 -- Testbench para reg_Nb
+entity reg_tb is
+end;
 
-library IEEE;
-use IEEE.std_logic_1164.all;
+architecture reg_tb_arq of reg_tb is 
 
-entity reg_Nb_tb is
-end reg_Nb_tb;
+    component reg is 
+        port (
+            clk_reg : in bit;
+            rst_reg : in bit;
+            ena_reg : in bit;
+            -- entradas de los bcd
+            d1_reg  : in bit_vector(3 downto 0);
+            d2_reg  : in bit_vector(3 downto 0);
+            d3_reg  : in bit_vector(3 downto 0);
+            -- salidas al mux
+            q1_reg  : out bit_vector(3 downto 0);
+            q2_reg  : out bit_vector(3 downto 0);
+            q3_reg  : out bit_vector(3 downto 0)
+        );
+    end component;
 
-architecture tb of reg_Nb_tb is
-  signal clk     : std_logic := '0';
-  signal rst     : std_logic := '0';
-  signal ena     : std_logic := '0';
+    signal clk_reg_tb   : bit := '0';
+    signal rst_reg_tb   : bit := '0';
+    signal ena_reg_tb   : bit := '0';
+    signal d1_reg_tb    : bit_vector(3 downto 0):= (3 downto 0 => '0');
+    signal d2_reg_tb    : bit_vector(3 downto 0):= (3 downto 0 => '0');
+    signal d3_reg_tb    : bit_vector(3 downto 0):= (3 downto 0 => '0');
+    signal q1_reg_tb    : bit_vector(3 downto 0):= (3 downto 0 => '0');
+    signal q2_reg_tb    : bit_vector(3 downto 0):= (3 downto 0 => '0');
+    signal q3_reg_tb    : bit_vector(3 downto 0):= (3 downto 0 => '0');
 
-  signal d1      : std_logic_vector(3 downto 0);
-  signal d2      : std_logic_vector(3 downto 0);
-  signal d3      : std_logic_vector(3 downto 0);
+begin   
+    ena_reg_tb <= '1' after 10 ns;
+    clk_reg_tb <= not clk_reg_tb  after 5 ns;
+    --rst_reg_tb <= '1' after 30 ns, '0' after 40 ns;
+    d1_reg_tb <= "0001" after 20 ns, "0010" after 30 ns, "0011" after 40 ns, "0100" after 50 ns, "0101" after 60 ns, "0110" after 70 ns, "0111" after 80 ns;
+	d2_reg_tb <= "0001" after 20 ns, "0010" after 30 ns, "0011" after 40 ns, "0100" after 50 ns, "0101" after 60 ns, "0110" after 70 ns, "0111" after 80 ns;
+	d3_reg_tb <= "0001" after 20 ns, "0010" after 30 ns, "0011" after 40 ns, "0100" after 50 ns, "0101" after 60 ns, "0110" after 70 ns, "0111" after 80 ns;
 
-  signal q1      : std_logic_vector(3 downto 0);
-  signal q2      : std_logic_vector(3 downto 0);
-  signal q3      : std_logic_vector(3 downto 0);
-begin
-
-  -- Instancia del registro
-  uut: entity work.reg_Nb
-    port map (
-      clk_reg => clk,
-      rst_reg => rst,
-      ena_reg => ena,
-      d1_reg => d1,
-      d2_reg => d2,
-      d3_reg => d3,
-      q1_reg => q1,
-      q2_reg => q2,
-      q3_reg => q3
-    );
-
-  -- Generación de reloj
-  clk <= not clk after 5 ns;
-
-  -- Estímulos
-  process
-  begin
-    -- Reset activo
-    rst <= '1';
-    ena <= '0';
-    d1 <= "0000"; d2 <= "0000"; d3 <= "0000";
-    wait for 20 ns;
-
-    -- Fin de reset
-    rst <= '0';
-    d1 <= "0001"; d2 <= "0010"; d3 <= "0011";
-    wait for 10 ns;
-
-    -- Enable activo
-    ena <= '1';
-    wait for 10 ns;
-
-    -- Cambian los datos
-    d1 <= "1001"; d2 <= "1010"; d3 <= "1011";
-    wait for 10 ns;
-
-    d1 <= "1100"; d2 <= "1101"; d3 <= "1110";
-    wait for 10 ns;
-
-    -- Desactivar enable
-    ena <= '0';
-    d1 <= "0000"; d2 <= "0000"; d3 <= "0000";
-    wait;
-
-  end process;
-end architecture;
+    DUT: reg
+        port map(
+            clk_reg => clk_reg_tb,
+            rst_reg => rst_reg_tb,
+            ena_reg => ena_reg_tb,
+            d1_reg  => d1_reg_tb,
+            d2_reg  => d2_reg_tb,
+            d3_reg  => d3_reg_tb,
+            q1_reg  => q1_reg_tb,
+            q2_reg  => q2_reg_tb,
+            q3_reg  => q3_reg_tb
+            );
+end;
