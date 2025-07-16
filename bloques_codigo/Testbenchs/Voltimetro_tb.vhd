@@ -1,79 +1,51 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-
-entity Voltimetro_tb is
+entity volti_tb is 
 end;
 
-architecture sim of Voltimetro_tb is
-
-    component Voltimetro is
-        port (
-            clk_i           : in std_logic;
-            rst_i           : in std_logic;
-            data_volt_in_i  : in std_logic;
-            data_volt_out_o : out std_logic;
-            hs_o            : out std_logic;
-            vs_o            : out std_logic;
-            red_o           : out std_logic;
-            grn_o           : out std_logic;
-            blu_o           : out std_logic
+architecture volti_tb_arq of volti_tb is 
+    
+    component volti is 
+        port(
+            --ena_volti   : in bit;
+            clk_volti   : in bit;
+            rst_volti   : in bit;
+            voltaje_i   : in bit;   -- tension de entrada, va al dato de ingreso del FFD de entrada
+            voltaje_s   : out bit;  -- salida negada del FFD de entrada
+            hs_o        : out bit;
+            vs_o        : out bit;
+            r_o         : out bit;
+            g_o         : out bit;
+            b_o         : out bit
         );
     end component;
 
-    -- Señales internas
-    signal clk_i           : std_logic := '0';
-    signal rst_i           : std_logic := '1';
-    signal data_volt_in_i  : std_logic := '0';
-    signal data_volt_out_o : std_logic;
-    signal hs_o            : std_logic;
-    signal vs_o            : std_logic;
-    signal red_o           : std_logic;
-    signal grn_o           : std_logic;
-    signal blu_o           : std_logic;
+    --signal ena_volti_tb : bit := '0';
+    signal clk_volti_tb : bit := '0';
+    signal rst_volti_tb : bit := '0';
+    signal voltaje_i_tb : bit := '0';
+    signal voltaje_s_tb : bit := '0';
+    signal hs_o_tb      : bit := '0';
+    signal vs_o_tb      : bit := '0';
+    signal r_o_tb       : bit := '0';
+    signal g_o_tb       : bit := '0';
+    signal b_o_tb       : bit := '0';
 
 begin
 
-    -- Instancia del DUT
-    DUT: Voltimetro
-        port map (
-            clk_i           => clk_i,
-            rst_i           => rst_i,
-            data_volt_in_i  => data_volt_in_i,
-            data_volt_out_o => data_volt_out_o,
-            hs_o            => hs_o,
-            vs_o            => vs_o,
-            red_o           => red_o,
-            grn_o           => grn_o,
-            blu_o           => blu_o
+    clk_volti_tb <= not clk_volti_tb after 10 ns;
+    --ena_volti_tb <= '1' after 5 ns;
+    voltaje_i_tb <= voltaje_s_tb;
+
+    DUT: volti
+        port map(
+            --ena_volti   => ena_volti_tb,
+            clk_volti   => clk_volti_tb,
+            rst_volti   => rst_volti_tb,
+            voltaje_i   => voltaje_i_tb,
+            voltaje_s   => voltaje_s_tb,
+            hs_o        => hs_o_tb,
+            vs_o        => vs_o_tb,
+            r_o         => r_o_tb,
+            g_o         => g_o_tb,
+            b_o         => b_o_tb
         );
-
-    -- Clock de 25 MHz (ciclo total: 40 ns)
-    clk_process : process
-    begin
-        while true loop
-            clk_i <= '0';
-            wait for 20 ns;
-            clk_i <= '1';
-            wait for 20 ns;
-        end loop;
-    end process;
-
-    -- Estímulos
-    stim_proc : process
-    begin
-        -- Reset activo inicialmente
-        wait for 100 ns;
-        rst_i <= '0';
-
-        -- Simular valores de ADC
-        for i in 0 to 500 loop
-            data_volt_in_i <= '1';
-            wait for 100 ns;
-            data_volt_in_i <= '0';
-            wait for 100 ns;
-        end loop;
-
-        wait;
-    end process;
-
-end architecture;
+end;
