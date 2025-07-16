@@ -7,11 +7,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity sum_1b is
   port(
-    a_i: in std_logic; -- Entrada A
-    b_i: in std_logic; -- Entrada B
-    c_i: in std_logic; -- Entrada Carry
-    s_o: out std_logic; -- Suma de A+B
-    c_o: out std_logic -- Salida Carry
+    a_i: in  bit_logic; -- Entrada A
+    b_i: in  bit_logic; -- Entrada B
+    c_i: in  bit_logic; -- Entrada Carry
+    s_o: out bit_logic; -- Suma de A+B
+    c_o: out bit_logic -- Salida Carry
   );
 end;
 
