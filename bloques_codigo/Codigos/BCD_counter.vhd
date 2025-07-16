@@ -8,27 +8,27 @@ use IEEE.numeric_std.all;
 entity BCD_counter is
   generic(N: natural := 4);
   port(
-    clk_bcd  : in std_logic;
-    rst_bcd  : in std_logic;
-    ena_bcd  : in std_logic;
-    q_bcd    : out std_logic_vector(N-1 downto 0);
-    max      : out std_logic
+    clk_bcd  : in  bit;
+    rst_bcd  : in  bit;
+    ena_bcd  : in  bit;
+    q_bcd    : out bit_vector(N-1 downto 0);
+    max      : out bit
   );
 end entity;
 
 architecture BCD_counter_arq of BCD_counter is
   component ffd is
     port(
-      clk_i : in std_logic;
-      rst_i : in std_logic;
-      ena_i : in std_logic;
-      d_i   : in std_logic;
-      q_o   : out std_logic
+      clk_i : in  bit;
+      rst_i : in  bit;
+      ena_i : in  bit;
+      d_i   : in  bit;
+      q_o   : out bit
     );
   end component;
 
-  signal q_o : std_logic_vector(3 downto 0);
-  signal d_i : std_logic_vector(3 downto 0);
+  signal q_o : bit_vector(3 downto 0);
+  signal d_i : bit_vector(3 downto 0);
 
 begin
 
