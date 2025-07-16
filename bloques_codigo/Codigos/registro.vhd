@@ -5,27 +5,27 @@ use IEEE.std_logic_1164.all;
 
 entity registro is
   port(
-    clk_r : in std_logic;
-    rst_r : in std_logic;
-    ena_r : in std_logic;
-    d_r   : in std_logic_vector(3 downto 0);
-    q_r   : out std_logic_vector(3 downto 0)
+    clk_r : in bit;
+    rst_r : in bit;
+    ena_r : in bit;
+    d_r   : in bit_vector(3 downto 0);
+    q_r   : out bit_vector(3 downto 0)
   );
 end entity;
 
 architecture registro_arq of registro is
   component ffd is
     port(
-      clk_i : in std_logic;
-      rst_i : in std_logic;
-      ena_i : in std_logic;
-      d_i   : in std_logic;
-      q_o   : out std_logic
+      clk_i : in  bit;
+      rst_i : in  bit;
+      ena_i : in  bit;
+      d_i   : in  bit;
+      q_o   : out bit
     );
   end component;
 
-  signal entrada_ffd : std_logic_vector(3 downto 0);
-  signal salida_ffd  : std_logic_vector(3 downto 0);
+  signal entrada_ffd : bit_vector(3 downto 0);
+  signal salida_ffd  : bit_vector(3 downto 0);
 begin
   ffd0: ffd port map(clk_i => clk_r, rst_i => rst_r, ena_i => ena_r, d_i => entrada_ffd(0), q_o => salida_ffd(0));
   ffd1: ffd port map(clk_i => clk_r, rst_i => rst_r, ena_i => ena_r, d_i => entrada_ffd(1), q_o => salida_ffd(1));
