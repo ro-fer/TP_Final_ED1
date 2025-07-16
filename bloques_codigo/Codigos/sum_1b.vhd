@@ -2,8 +2,7 @@
 
 -- Estudiante: Fernandez, Rocio
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+
 
 entity sum_1b is
   port(
