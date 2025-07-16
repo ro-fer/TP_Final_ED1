@@ -1,3 +1,5 @@
+-- Colores, si el selector es 1 --> color ; si el selector 0 --> B
+
 entity mux_color is 
     port(
         RGB : in bit;
