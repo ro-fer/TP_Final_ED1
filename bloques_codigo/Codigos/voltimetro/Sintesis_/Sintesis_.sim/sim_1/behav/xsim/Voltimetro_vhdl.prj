@@ -1,0 +1,21 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../../BCD_counter/Fuentes/BCD_counter.vhd" \
+"../../../../../../c33k/Fuentes/c33k.vhd" \
+"../../../../../../cOnes/Fuentes/cOnes.vhd" \
+"../../../../../../carac_rom/Fuentes/carac_rom.vhd" \
+"../../../../../../comp_Nb/Fuentes/comp_Nb.vhd" \
+"../../../../../../cont_bin_gen/Fuentes/cont_bin_gen.vhd" \
+"../../../../../../ffd/Fuentes/ffd.vhd" \
+"../../../../../../hsync/Fuentes/hsync.vhd" \
+"../../../../../../mux/Fuentes/mux.vhd" \
+"../../../../../../mux_color/Fuentes/mux_color.vhd" \
+"../../../../../../mux_selector/Fuentes/mux_selector.vhd" \
+"../../../../../../reg_Nb/Fuentes/reg_Nb.vhd" \
+"../../../../../../registro/Fuentes/registro.vhd" \
+"../../../../../../vga_controller/Fuentes/vga_controller.vhd" \
+"../../../../../../vsync/Fuentes/vsync.vhd" \
+"../../../../../Fuentes/Voltimetro.vhd" \
+
+# Do not sort compile order
+nosort

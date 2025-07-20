@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Jul 18 17:27:44 2025
+# Process ID: 1236
+# Current directory: C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Sintesis_/Sintesis_.runs/synth_1
+# Command line: vivado.exe -log Voltimetro.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Voltimetro.tcl
+# Log file: C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Sintesis_/Sintesis_.runs/synth_1/Voltimetro.vds
+# Journal file: C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Sintesis_/Sintesis_.runs/synth_1\vivado.jou
+# Running On: DESKTOP-0DQBFK7, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 2, Host memory: 4163 MB
+#-----------------------------------------------------------
+source Voltimetro.tcl -notrace

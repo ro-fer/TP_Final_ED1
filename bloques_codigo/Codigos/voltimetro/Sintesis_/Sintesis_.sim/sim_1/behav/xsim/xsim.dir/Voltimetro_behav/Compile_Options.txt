@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "Voltimetro_behav" "xil_defaultlib.Voltimetro" -log "elaborate.log" 

@@ -1,0 +1,6 @@
+ghdl -s ../../ffd/Fuentes/ffd.vhd ../../cont_bin_gen/Fuentes/cont_bin_gen.vhd ../../comp_Nb/Fuentes/comp_Nb.vhd  ../../vsync/Fuentes/vsync.vhd ../../hsync/Fuentes/hsync.vhd   ../../mux_color/Fuentes/mux_color.vhd    ../../mux_selector/Fuentes/mux_selector.vhd  ../../mux/Fuentes/mux.vhd  ../../vga_controller/Fuentes/vga_controller.vhd   ../../cOnes/Fuentes/cOnes.vhd  ../../c33k/Fuentes/c33k.vhd ../../carac_rom/Fuentes/carac_rom.vhd  ../../BCD_counter/Fuentes/BCD_counter.vhd  ../../registro/Fuentes/registro.vhd  ../../reg_Nb/Fuentes/reg_Nb.vhd ../Fuentes/Voltimetro.vhd  ../Fuentes/Voltimetro_tb.vhd
+ghdl -a  ../../ffd/Fuentes/ffd.vhd ../../cont_bin_gen/Fuentes/cont_bin_gen.vhd ../../comp_Nb/Fuentes/comp_Nb.vhd  ../../vsync/Fuentes/vsync.vhd ../../hsync/Fuentes/hsync.vhd   ../../mux_color/Fuentes/mux_color.vhd    ../../mux_selector/Fuentes/mux_selector.vhd  ../../mux/Fuentes/mux.vhd  ../../vga_controller/Fuentes/vga_controller.vhd   ../../cOnes/Fuentes/cOnes.vhd  ../../c33k/Fuentes/c33k.vhd ../../carac_rom/Fuentes/carac_rom.vhd  ../../BCD_counter/Fuentes/BCD_counter.vhd  ../../registro/Fuentes/registro.vhd  ../../reg_Nb/Fuentes/reg_Nb.vhd ../Fuentes/Voltimetro.vhd  ../Fuentes/Voltimetro_tb.vhd
+ghdl -e Voltimetro_tb
+ghdl -r Voltimetro_tb --vcd=Voltimetro_tb.vcd --stop-time=2ms
+gtkwave Voltimetro_tb.vcd
+

@@ -1,0 +1,346 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Jul 18 17:27:44 2025
+# Process ID: 1236
+# Current directory: C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Sintesis_/Sintesis_.runs/synth_1
+# Command line: vivado.exe -log Voltimetro.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Voltimetro.tcl
+# Log file: C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Sintesis_/Sintesis_.runs/synth_1/Voltimetro.vds
+# Journal file: C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Sintesis_/Sintesis_.runs/synth_1\vivado.jou
+# Running On: DESKTOP-0DQBFK7, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 2, Host memory: 4163 MB
+#-----------------------------------------------------------
+source Voltimetro.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 417.246 ; gain = 83.816
+Command: synth_design -top Voltimetro -part xc7a35ticsg324-1L
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35ti'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35ti'
+INFO: [Device 21-403] Loading part xc7a35ticsg324-1L
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 9220
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [C:/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1225.352 ; gain = 407.324
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'Voltimetro' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:19]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'FFD_ENTRADA' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:179]
+INFO: [Synth 8-638] synthesizing module 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:15]
+INFO: [Synth 8-256] done synthesizing module 'ffd' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:15]
+INFO: [Synth 8-3491] module 'cont_bin_gen' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:4' bound to instance 'CONT_2B' of component 'cont_bin_gen' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:189]
+INFO: [Synth 8-638] synthesizing module 'cont_bin_gen' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:16]
+	Parameter N bound to: 2 - type: integer 
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffd0' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:39]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-256] done synthesizing module 'cont_bin_gen' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:16]
+INFO: [Synth 8-3491] module 'c33k' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/c33k/Fuentes/c33k.vhd:5' bound to instance 'CONT_BINARIO' of component 'c33k' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:197]
+INFO: [Synth 8-638] synthesizing module 'c33k' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/c33k/Fuentes/c33k.vhd:17]
+INFO: [Synth 8-3491] module 'cont_bin_gen' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:4' bound to instance 'cont33k' of component 'cont_bin_gen' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/c33k/Fuentes/c33k.vhd:49]
+INFO: [Synth 8-638] synthesizing module 'cont_bin_gen__parameterized1' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:16]
+	Parameter N bound to: 22 - type: integer 
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffd0' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:39]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-256] done synthesizing module 'cont_bin_gen__parameterized1' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:16]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'FFD_salida' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/c33k/Fuentes/c33k.vhd:57]
+INFO: [Synth 8-256] done synthesizing module 'c33k' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/c33k/Fuentes/c33k.vhd:17]
+INFO: [Synth 8-3491] module 'cOnes' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:5' bound to instance 'CONT_1S' of component 'cOnes' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:207]
+INFO: [Synth 8-638] synthesizing module 'cOnes' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:20]
+INFO: [Synth 8-3491] module 'BCD_counter' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:5' bound to instance 'bcd1' of component 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:55]
+INFO: [Synth 8-638] synthesizing module 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:14]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'FF0' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:32]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'FF1' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:41]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'FF2' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:50]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'FF3' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:59]
+INFO: [Synth 8-256] done synthesizing module 'BCD_counter' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:14]
+INFO: [Synth 8-3491] module 'BCD_counter' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:5' bound to instance 'bcd2' of component 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:63]
+INFO: [Synth 8-3491] module 'BCD_counter' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:5' bound to instance 'bcd3' of component 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:71]
+INFO: [Synth 8-3491] module 'BCD_counter' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:5' bound to instance 'bcd4' of component 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:79]
+INFO: [Synth 8-3491] module 'BCD_counter' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:5' bound to instance 'bcd5' of component 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:87]
+INFO: [Synth 8-3491] module 'BCD_counter' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:5' bound to instance 'bcd6' of component 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:95]
+INFO: [Synth 8-3491] module 'BCD_counter' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd:5' bound to instance 'bcd7' of component 'BCD_counter' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:103]
+INFO: [Synth 8-256] done synthesizing module 'cOnes' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd:20]
+INFO: [Synth 8-3491] module 'reg_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/reg_Nb/Fuentes/reg_Nb.vhd:5' bound to instance 'REGISTRO' of component 'reg_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:221]
+INFO: [Synth 8-638] synthesizing module 'reg_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/reg_Nb/Fuentes/reg_Nb.vhd:23]
+INFO: [Synth 8-3491] module 'registro' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:4' bound to instance 'reg1' of component 'registro' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/reg_Nb/Fuentes/reg_Nb.vhd:37]
+INFO: [Synth 8-638] synthesizing module 'registro' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:14]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffd0' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:28]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffd1' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:29]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffd2' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:30]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffd3' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:31]
+INFO: [Synth 8-256] done synthesizing module 'registro' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:14]
+INFO: [Synth 8-3491] module 'registro' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:4' bound to instance 'reg2' of component 'registro' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/reg_Nb/Fuentes/reg_Nb.vhd:46]
+INFO: [Synth 8-3491] module 'registro' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd:4' bound to instance 'reg3' of component 'registro' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/reg_Nb/Fuentes/reg_Nb.vhd:55]
+INFO: [Synth 8-256] done synthesizing module 'reg_Nb' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/reg_Nb/Fuentes/reg_Nb.vhd:23]
+INFO: [Synth 8-3491] module 'mux' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux/Fuentes/mux.vhd:6' bound to instance 'MX' of component 'mux' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:234]
+INFO: [Synth 8-638] synthesizing module 'mux' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux/Fuentes/mux.vhd:19]
+INFO: [Synth 8-256] done synthesizing module 'mux' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux/Fuentes/mux.vhd:19]
+INFO: [Synth 8-3491] module 'rom' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/carac_rom/Fuentes/carac_rom.vhd:5' bound to instance 'rom_arq' of component 'rom' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:246]
+INFO: [Synth 8-638] synthesizing module 'rom' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/carac_rom/Fuentes/carac_rom.vhd:14]
+INFO: [Synth 8-256] done synthesizing module 'rom' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/carac_rom/Fuentes/carac_rom.vhd:14]
+INFO: [Synth 8-3491] module 'vga_controller' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:6' bound to instance 'VGA_vga' of component 'vga_controller' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:254]
+INFO: [Synth 8-638] synthesizing module 'vga_controller' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:29]
+INFO: [Synth 8-3491] module 'hsync' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:3' bound to instance 'sincronismo_horizontal' of component 'hsync' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:85]
+INFO: [Synth 8-638] synthesizing module 'hsync' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:16]
+INFO: [Synth 8-3491] module 'cont_bin_gen' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:4' bound to instance 'cont800' of component 'cont_bin_gen' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:61]
+INFO: [Synth 8-638] synthesizing module 'cont_bin_gen__parameterized2' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:16]
+	Parameter N bound to: 10 - type: integer 
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffd0' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:39]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdN' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:53]
+INFO: [Synth 8-256] done synthesizing module 'cont_bin_gen__parameterized2' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:16]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp639' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:71]
+INFO: [Synth 8-638] synthesizing module 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:14]
+INFO: [Synth 8-256] done synthesizing module 'comp_Nb' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:14]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp655' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:78]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp751' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:85]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp799' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:92]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdhsync' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:101]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdhvidon' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:110]
+INFO: [Synth 8-256] done synthesizing module 'hsync' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd:16]
+INFO: [Synth 8-3491] module 'vsync' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:3' bound to instance 'sincronismo_vertical' of component 'vsync' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:96]
+INFO: [Synth 8-638] synthesizing module 'vsync' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:14]
+INFO: [Synth 8-3491] module 'cont_bin_gen' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd:4' bound to instance 'cont525' of component 'cont_bin_gen' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:61]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp479' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:69]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp489' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:76]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp491' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:83]
+INFO: [Synth 8-3491] module 'comp_Nb' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd:5' bound to instance 'comp524' of component 'comp_Nb' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:90]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdvsync' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:97]
+INFO: [Synth 8-3491] module 'ffd' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd:5' bound to instance 'ffdvvidon' of component 'ffd' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:106]
+INFO: [Synth 8-256] done synthesizing module 'vsync' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd:14]
+INFO: [Synth 8-3491] module 'mux_color' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_color/Fuentes/mux_color.vhd:5' bound to instance 'mux_r' of component 'mux_color' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:111]
+INFO: [Synth 8-638] synthesizing module 'mux_color' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_color/Fuentes/mux_color.vhd:14]
+INFO: [Synth 8-256] done synthesizing module 'mux_color' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_color/Fuentes/mux_color.vhd:14]
+INFO: [Synth 8-3491] module 'mux_color' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_color/Fuentes/mux_color.vhd:5' bound to instance 'mux_g' of component 'mux_color' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:119]
+INFO: [Synth 8-3491] module 'mux_color' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_color/Fuentes/mux_color.vhd:5' bound to instance 'mux_b' of component 'mux_color' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:127]
+INFO: [Synth 8-3491] module 'mux_selector' declared at 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_selector/Fuentes/mux_selector.vhd:5' bound to instance 'mux_selec' of component 'mux_selector' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:140]
+INFO: [Synth 8-638] synthesizing module 'mux_selector' [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_selector/Fuentes/mux_selector.vhd:14]
+INFO: [Synth 8-256] done synthesizing module 'mux_selector' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_selector/Fuentes/mux_selector.vhd:14]
+INFO: [Synth 8-256] done synthesizing module 'vga_controller' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd:29]
+INFO: [Synth 8-256] done synthesizing module 'Voltimetro' (0#1) [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd:19]
+WARNING: [Synth 8-7129] Port ena in module Voltimetro is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 1320.590 ; gain = 502.562
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1320.590 ; gain = 502.562
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1320.590 ; gain = 502.562
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 1320.590 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Arty_A7_35.xdc]
+Finished Parsing XDC File [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Arty_A7_35.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Arty_A7_35.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Voltimetro_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/Voltimetro_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1428.656 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.027 . Memory (MB): peak = 1428.656 ; gain = 0.000
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [C:/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:26 ; elapsed = 00:00:32 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35ticsg324-1L
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:26 ; elapsed = 00:00:32 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:32 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:27 ; elapsed = 00:00:33 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input    3 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 124   
++---Registers : 
+	                1 Bit    Registers := 90    
++---Muxes : 
+	   2 Input   10 Bit        Muxes := 1     
+	 104 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-7129] Port ena in module Voltimetro is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:33 ; elapsed = 00:00:41 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:43 ; elapsed = 00:00:53 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:43 ; elapsed = 00:00:53 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:43 ; elapsed = 00:00:53 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |BUFG  |     2|
+|2     |LUT1  |    12|
+|3     |LUT2  |    15|
+|4     |LUT3  |    25|
+|5     |LUT4  |    33|
+|6     |LUT5  |    21|
+|7     |LUT6  |    43|
+|8     |MUXF7 |     3|
+|9     |FDRE  |    90|
+|10    |IBUF  |     3|
+|11    |OBUF  |     6|
++------+------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:35 ; elapsed = 00:00:59 . Memory (MB): peak = 1428.656 ; gain = 502.562
+Synthesis Optimization Complete : Time (s): cpu = 00:00:52 ; elapsed = 00:01:04 . Memory (MB): peak = 1428.656 ; gain = 610.629
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1428.656 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 3 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1428.656 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 6d8e0e97
+INFO: [Common 17-83] Releasing license: Synthesis
+135 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:58 ; elapsed = 00:01:16 . Memory (MB): peak = 1428.656 ; gain = 1011.410
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Sintesis_/Sintesis_.runs/synth_1/Voltimetro.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file Voltimetro_utilization_synth.rpt -pb Voltimetro_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Jul 18 17:29:19 2025...

@@ -1,0 +1,92 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
+| Date         : Fri Jul 18 17:30:51 2025
+| Host         : DESKTOP-0DQBFK7 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file Voltimetro_control_sets_placed.rpt
+| Design       : Voltimetro
+| Device       : xc7a35ti
+---------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    14 |
+|    Minimum number of control sets                        |    14 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    62 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    14 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |     8 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     0 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     1 |
+| >= 14 to < 16      |     0 |
+| >= 16              |     1 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               6 |            5 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              44 |           20 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |              40 |           10 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------------+-----------------------------------------------------------+-----------------------------------------------------------------------------+------------------+----------------+--------------+
+|     Clock Signal     |                       Enable Signal                       |                               Set/Reset Signal                              | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------------+-----------------------------------------------------------+-----------------------------------------------------------------------------+------------------+----------------+--------------+
+|  salida_gen_BUFG[1]  |                                                           | rst_volti_IBUF                                                              |                1 |              1 |         1.00 |
+|  clk_volti_IBUF_BUFG |                                                           |                                                                             |                1 |              2 |         2.00 |
+|  salida_gen_BUFG[1]  |                                                           |                                                                             |                4 |              4 |         1.00 |
+|  salida_gen_BUFG[1]  | CONT_1S/bcd2/FF0/p_7_in                                   | CONT_1S/bcd7/FF1/q_o_reg_1                                                  |                1 |              4 |         4.00 |
+|  salida_gen_BUFG[1]  | CONT_1S/bcd1/FF2/p_2_in3_in                               | CONT_1S/bcd7/FF1/q_o_reg_1                                                  |                2 |              4 |         2.00 |
+|  salida_gen_BUFG[1]  | CONT_1S/bcd3/FF1/p_15_in                                  | CONT_1S/bcd7/FF1/q_o_reg_1                                                  |                1 |              4 |         4.00 |
+|  salida_gen_BUFG[1]  | CONT_1S/bcd5/FF3/p_19_in                                  | CONT_1S/bcd7/FF1/q_o_reg_1                                                  |                1 |              4 |         4.00 |
+|  salida_gen_BUFG[1]  | CONT_1S/bcd3/FF3/p_11_in                                  | CONT_1S/bcd7/FF1/q_o_reg_1                                                  |                1 |              4 |         4.00 |
+|  salida_gen_BUFG[1]  | CONT_1S/bcd5/FF2/p_23_in                                  | CONT_1S/bcd7/FF1/q_o_reg_1                                                  |                1 |              4 |         4.00 |
+|  salida_gen_BUFG[1]  | FFD_ENTRADA/q_o                                           | CONT_1S/bcd7/FF1/q_o_reg_1                                                  |                1 |              4 |         4.00 |
+|  salida_gen_BUFG[1]  |                                                           | VGA_vga/sincronismo_horizontal/cont800/cont_bin10[0].etapa_0.ffd0/reset_aux |                4 |             10 |         2.50 |
+|  salida_gen_BUFG[1]  |                                                           | VGA_vga/sincronismo_vertical/cont525/cont_bin10[9].etapa_1.ffdN/q_o_reg_1   |                6 |             11 |         1.83 |
+|  salida_gen_BUFG[1]  | CONT_BINARIO/cont33k/cont_bin10[0].etapa_0.ffd0/q_o_reg_1 | rst_volti_IBUF                                                              |                2 |             12 |         6.00 |
+|  salida_gen_BUFG[1]  |                                                           | CONT_BINARIO/cont33k/cont_bin10[0].etapa_0.ffd0/rst_cont                    |                9 |             22 |         2.44 |
++----------------------+-----------------------------------------------------------+-----------------------------------------------------------------------------+------------------+----------------+--------------+
+
+

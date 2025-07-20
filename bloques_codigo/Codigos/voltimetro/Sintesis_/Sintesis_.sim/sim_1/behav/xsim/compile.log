@@ -1,0 +1,32 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/BCD_counter/Fuentes/BCD_counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'BCD_counter'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/c33k/Fuentes/c33k.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'c33k'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cOnes/Fuentes/cOnes.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'cOnes'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/carac_rom/Fuentes/carac_rom.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'rom'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/comp_Nb/Fuentes/comp_Nb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'comp_Nb'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/cont_bin_gen/Fuentes/cont_bin_gen.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'cont_bin_gen'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/ffd/Fuentes/ffd.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'ffd'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/hsync/Fuentes/hsync.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'hsync'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux/Fuentes/mux.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'mux'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_color/Fuentes/mux_color.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'mux_color'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/mux_selector/Fuentes/mux_selector.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'mux_selector'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/reg_Nb/Fuentes/reg_Nb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'reg_Nb'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/registro/Fuentes/registro.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'registro'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vga_controller/Fuentes/vga_controller.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'vga_controller'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/vsync/Fuentes/vsync.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'vsync'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Alpha/Documents/GitHub/TP_Final_ED1/bloques_codigo/Codigos/voltimetro/Fuentes/Voltimetro.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Voltimetro'
