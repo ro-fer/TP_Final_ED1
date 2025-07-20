@@ -1,0 +1,64 @@
+-- CONTADOR BINARIO DE 16 bits
+
+
+entity cont_bin_gen is
+  generic(
+      N: natural := 4 
+  );
+  port (
+    clk_bin_gen : in bit;
+    ena_bin_gen : in bit;
+    rst_bin_gen : in bit;
+    salida_gen  : out bit_vector(N-1 downto 0)
+  );
+end entity;
+
+architecture cont_bin_gen_arq of cont_bin_gen is
+
+  component ffd is
+    port (
+      clk_i   : in  bit;
+      rst_i   : in  bit;
+      ena_i   : in  bit;
+      d_i     : in  bit;
+      q_o     : out bit
+    );
+  end component;
+
+    signal salAnd   : bit_vector(N-1 downto 0);  
+    signal salXor   : bit_vector(N-1 downto 0); 
+    -- signal entrada  : bit_vector(9 downto 0);
+    signal salida   : bit_vector(N-1 downto 0);
+
+begin
+    salAnd(0) <= ena_bin_gen;
+    salXor(0) <= salAnd(0) xor salida(0);
+
+    cont_bin10: for i in 0 to N-1 generate
+        etapa_0: if i = 0 generate
+            ffd0: ffd port map (
+                        clk_i => clk_bin_gen,
+                        rst_i => rst_bin_gen,
+                        ena_i => '1',
+                        d_i => salXor(0),
+                        q_o => salida(0)
+                    );
+        end generate;
+        
+        etapa_1: if i > 0 generate
+            --conexiones de las N etapas
+            salAnd(i) <= salAnd(i-1) and salida(i-1);
+            salXor(i) <= salAnd(i) xor salida(i);
+
+            ffdN: ffd port map (
+                        clk_i => clk_bin_gen,
+                        rst_i => rst_bin_gen,
+                        ena_i => '1',
+                        d_i => salXor(i),
+                        q_o => salida(i)
+                    );
+        end generate;
+    end generate;
+    
+    salida_gen <= salida;
+end;
