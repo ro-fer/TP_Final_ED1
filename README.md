@@ -30,9 +30,8 @@ Contenido próximamente disponible.
 Contenido próximamente disponible.
 
 ## 📺 Resultado final
-![En construcción](https://img.shields.io/badge/estado-en%20construcci%C3%B3n-yellow?style=for-the-badge&logo=github)
 
-Contenido próximamente disponible.
+
 
 ## 👨‍🏫 Cátedra
 
