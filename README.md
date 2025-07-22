@@ -46,7 +46,7 @@ Se incluyen esquemas y simulaciones en el informe PDF dentro del repositorio.
 
 ## 📚 Informe final
 
-📄 [Descargar informe (PDF)](./Informe/TP_Final_ED1_FernandezRocio_.docx.pdf)
+📄 [Descargar informe (PDF)](./Informe/TP_Final_ED1_FernandezRocio.pdf)
 
 Incluye:
 - Objetivo y resumen
